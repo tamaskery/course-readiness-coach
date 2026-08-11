@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version metadata for the Course Coach plugin.
+ * Version metadata for the Course Readiness Coach plugin.
  *
  * @package   local_coursecoach
  * @copyright 2026 Course Coach contributors

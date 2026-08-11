@@ -4,6 +4,8 @@ Course Readiness Coach (`local_coursecoach`) is a read-only Moodle course-readin
 
 > Check whether your Moodle course is ready for learners.
 
+Current release: **0.3.0**.
+
 ## Installation
 
 Place this directory at `local/coursecoach` in a supported Moodle checkout, then complete the standard Moodle plugin upgrade process. Editing teachers and managers receive `local/coursecoach:view` by default.

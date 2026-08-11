@@ -1,0 +1,46 @@
+name: Moodle Plugin CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    name: Moodle ${{ matrix.moodle-branch }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        moodle-branch: [MOODLE_405_STABLE, MOODLE_502_STABLE]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Moodle Plugin CI
+        uses: moodlehq/moodle-plugin-ci@master
+        with:
+          moodle-branch: ${{ matrix.moodle-branch }}
+          php: '8.2'
+          database: mariadb
+          plugin-path: local/coursecoach
+      - name: PHP lint
+        run: moodle-plugin-ci phplint
+      - name: Moodle coding standards
+        run: moodle-plugin-ci phpcs
+      - name: Plugin validation
+        run: moodle-plugin-ci validate
+      - name: PHPUnit
+        run: moodle-plugin-ci phpunit
+
+  package-layout:
+    name: Installable package layout
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the Moodle plugin archive layout
+        run: |
+          mkdir -p build/coursecoach
+          git archive --format=tar HEAD | tar -xf - -C build/coursecoach
+          test -f build/coursecoach/version.php
+          grep -q "\$plugin->component = 'local_coursecoach';" build/coursecoach/version.php
+          (cd build && zip -qr coursecoach.zip coursecoach)
+          unzip -Z1 build/coursecoach.zip | grep -qx 'coursecoach/version.php'

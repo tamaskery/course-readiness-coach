@@ -1,0 +1,4 @@
+/local_coursecoach-*.zip
+/build/
+/vendor/
+/.phpunit.result.cache
