@@ -1,0 +1,76 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+/**
+ * Incomplete course content check.
+ *
+ * @package   local_coursecoach
+ * @copyright 2026 Course Coach contributors
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace local_coursecoach\check;
+
+use moodle_url;
+use stdClass;
+
+/**
+ * Detects visible non-general sections containing no course modules.
+ */
+final class incomplete_content implements checker {
+    /** @var int Score weight. */
+    private const WEIGHT = 1;
+
+    /**
+     * Assess deterministic empty-section configuration.
+     *
+     * @param stdClass $course Course record.
+     * @return result
+     */
+    public function check(stdClass $course): result {
+        $modinfo = get_fast_modinfo($course);
+        $empty = [];
+        foreach ($modinfo->get_section_info_all() as $section) {
+            if ($section->section === 0 || !$section->visible || !empty($modinfo->sections[$section->section])) {
+                continue;
+            }
+            $empty[] = $section;
+        }
+
+        $title = get_string('check:incomplete:title', 'local_coursecoach');
+        if ($empty) {
+            return new result(true, result::STATUS_WARNING, result::SEVERITY_RECOMMENDATION, $title,
+                get_string('check:incomplete:warning:explanation', 'local_coursecoach', $this->names($course, $empty)),
+                get_string('check:incomplete:warning:recommendation', 'local_coursecoach'),
+                new moodle_url('/course/editsection.php', ['id' => $empty[0]->id]),
+                get_string('action:section', 'local_coursecoach'));
+        }
+
+        return new result(true, result::STATUS_PASSED, result::SEVERITY_RECOMMENDATION, $title,
+            get_string('check:incomplete:passed:explanation', 'local_coursecoach'),
+            get_string('check:incomplete:passed:recommendation', 'local_coursecoach'));
+    }
+
+    /** @return int */
+    public function get_weight(): int {
+        return self::WEIGHT;
+    }
+
+    /**
+     * @param stdClass $course Course record.
+     * @param array $sections Empty sections.
+     * @return string Formatted section names.
+     */
+    private function names(stdClass $course, array $sections): string {
+        $names = [];
+        foreach ($sections as $section) {
+            $names[] = format_string(get_section_name($course, $section));
+        }
+        return implode(', ', $names);
+    }
+}

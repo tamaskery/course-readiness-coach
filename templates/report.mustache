@@ -1,0 +1,104 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    @template local_coursecoach/report
+
+    Course Readiness Coach report.
+
+    Context variables required for this template:
+    * score - Readiness score from 0 to 100.
+    * scorelabel - Accessible score label.
+    * readinesslabel - Overall readiness label.
+    * readinessclass - Moodle-native badge colour class.
+    * passedcount - Number of passed checks.
+    * warningcount - Number of warning checks.
+    * criticalcount - Number of critical checks.
+    * checks - Individual check results.
+}}
+<div class="local-coursecoach-report">
+    <p class="lead">{{#str}} reportintro, local_coursecoach {{/str}}</p>
+
+    <section class="card mb-4" aria-labelledby="local-coursecoach-score-heading">
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div>
+                    <h2 id="local-coursecoach-score-heading" class="h4">
+                        {{#str}} readinessscore, local_coursecoach {{/str}}
+                    </h2>
+                    <span class="badge {{readinessclass}}">{{readinesslabel}}</span>
+                </div>
+                <div class="display-4" aria-label="{{scorelabel}}">
+                    {{score}}<span class="h4 text-muted">/100</span>
+                </div>
+            </div>
+            <div
+                class="progress mt-3"
+                role="progressbar"
+                aria-label="{{scorelabel}}"
+                aria-valuenow="{{score}}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+            >
+                <div class="progress-bar {{readinessclass}}" style="width: {{score}}%"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-4" aria-labelledby="local-coursecoach-summary-heading">
+        <h2 id="local-coursecoach-summary-heading" class="h4">
+            {{#str}} summary, local_coursecoach {{/str}}
+        </h2>
+        <div class="row g-3">
+            <div class="col-sm-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="h3 mb-0">{{passedcount}}</div>
+                        <div>{{#str}} passed, local_coursecoach {{/str}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="h3 mb-0">{{warningcount}}</div>
+                        <div>{{#str}} warnings, local_coursecoach {{/str}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="h3 mb-0">{{criticalcount}}</div>
+                        <div>{{#str}} criticalissues, local_coursecoach {{/str}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="local-coursecoach-checks">
+        {{#checks}}
+            <section class="card mb-3" aria-labelledby="local-coursecoach-check-{{index}}">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                        <h2 id="local-coursecoach-check-{{index}}" class="h5 mb-2">{{title}}</h2>
+                        <span class="badge {{statusclass}}">{{statuslabel}}</span>
+                    </div>
+                    <p>{{explanation}}</p>
+                    <h3 class="h6">{{#str}} recommendation, local_coursecoach {{/str}}</h3>
+                    <p>{{recommendation}}</p>
+                    {{#hassettingsurl}}
+                        <a class="btn btn-secondary" href="{{settingsurl}}">
+                            {{actionlabel}}
+                        </a>
+                    {{/hassettingsurl}}
+                </div>
+            </section>
+        {{/checks}}
+    </div>
+</div>
