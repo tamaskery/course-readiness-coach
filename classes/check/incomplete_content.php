@@ -5,6 +5,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Incomplete course content check.
@@ -44,24 +52,40 @@ final class incomplete_content implements checker {
 
         $title = get_string('check:incomplete:title', 'local_coursecoach');
         if ($empty) {
-            return new result(true, result::STATUS_WARNING, result::SEVERITY_RECOMMENDATION, $title,
+            return new result(
+                true,
+                result::STATUS_WARNING,
+                result::SEVERITY_RECOMMENDATION,
+                $title,
                 get_string('check:incomplete:warning:explanation', 'local_coursecoach', $this->names($course, $empty)),
                 get_string('check:incomplete:warning:recommendation', 'local_coursecoach'),
                 new moodle_url('/course/editsection.php', ['id' => $empty[0]->id]),
-                get_string('action:section', 'local_coursecoach'));
+                get_string('action:section', 'local_coursecoach')
+            );
         }
 
-        return new result(true, result::STATUS_PASSED, result::SEVERITY_RECOMMENDATION, $title,
+        return new result(
+            true,
+            result::STATUS_PASSED,
+            result::SEVERITY_RECOMMENDATION,
+            $title,
             get_string('check:incomplete:passed:explanation', 'local_coursecoach'),
-            get_string('check:incomplete:passed:recommendation', 'local_coursecoach'));
+            get_string('check:incomplete:passed:recommendation', 'local_coursecoach')
+        );
     }
 
-    /** @return int */
+    /**
+     * Return the score weight.
+     *
+     * @return int Score weight.
+     */
     public function get_weight(): int {
         return self::WEIGHT;
     }
 
     /**
+     * Return formatted section names.
+     *
      * @param stdClass $course Course record.
      * @param array $sections Empty sections.
      * @return string Formatted section names.

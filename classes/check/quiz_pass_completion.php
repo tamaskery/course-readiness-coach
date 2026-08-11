@@ -5,6 +5,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Quiz pass and completion configuration check.
@@ -78,8 +86,10 @@ final class quiz_pass_completion implements checker {
                 continue;
             }
 
-            if ($completioninfo->is_enabled($cm) !== COMPLETION_TRACKING_AUTOMATIC ||
-                    empty($cm->completionpassgrade)) {
+            if (
+                $completioninfo->is_enabled($cm) !== COMPLETION_TRACKING_AUTOMATIC ||
+                empty($cm->completionpassgrade)
+            ) {
                 $withoutpasscompletion[] = $cm;
             }
         }
@@ -87,12 +97,18 @@ final class quiz_pass_completion implements checker {
         if ($withoutpassgrade || $withoutpasscompletion) {
             $issues = [];
             if ($withoutpassgrade) {
-                $issues[] = get_string('check:quiz:nopassgrade:issue', 'local_coursecoach',
-                    $this->activity_names($withoutpassgrade));
+                $issues[] = get_string(
+                    'check:quiz:nopassgrade:issue',
+                    'local_coursecoach',
+                    $this->activity_names($withoutpassgrade)
+                );
             }
             if ($withoutpasscompletion) {
-                $issues[] = get_string('check:quiz:nopasscompletion:issue', 'local_coursecoach',
-                    $this->activity_names($withoutpasscompletion));
+                $issues[] = get_string(
+                    'check:quiz:nopasscompletion:issue',
+                    'local_coursecoach',
+                    $this->activity_names($withoutpasscompletion)
+                );
             }
             $firstaffected = $withoutpassgrade[0] ?? $withoutpasscompletion[0];
 

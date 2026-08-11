@@ -5,6 +5,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for incomplete course content.
@@ -18,9 +26,15 @@ namespace local_coursecoach\check;
 
 use advanced_testcase;
 
-/** @covers \local_coursecoach\check\incomplete_content */
+/**
+ * Tests the incomplete content checker.
+ *
+ * @covers \local_coursecoach\check\incomplete_content
+ */
 final class incomplete_content_test extends advanced_testcase {
-    /** Test a visible empty non-general section warns. */
+    /**
+     * Test a visible empty non-general section warns.
+     */
     public function test_visible_empty_section_warns(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);
@@ -29,7 +43,9 @@ final class incomplete_content_test extends advanced_testcase {
         $this->assertSame(result::STATUS_WARNING, (new incomplete_content())->check($course)->get_status());
     }
 
-    /** Test a section containing an activity passes. */
+    /**
+     * Test a section containing an activity passes.
+     */
     public function test_section_with_content_passes(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);
@@ -39,7 +55,9 @@ final class incomplete_content_test extends advanced_testcase {
         $this->assertSame(result::STATUS_PASSED, (new incomplete_content())->check($course)->get_status());
     }
 
-    /** Test a hidden empty section is ignored. */
+    /**
+     * Test a hidden empty section is ignored.
+     */
     public function test_hidden_empty_section_is_ignored(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);
@@ -49,7 +67,9 @@ final class incomplete_content_test extends advanced_testcase {
         $this->assertSame(result::STATUS_PASSED, (new incomplete_content())->check($course)->get_status());
     }
 
-    /** Test the general section is not treated as incomplete. */
+    /**
+     * Test the general section is not treated as incomplete.
+     */
     public function test_empty_general_section_does_not_warn(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);

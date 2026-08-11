@@ -5,6 +5,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Quiz question randomisation check.
@@ -94,12 +102,18 @@ final class quiz_question_randomisation implements checker {
         );
     }
 
-    /** @return int */
+    /**
+     * Return the score weight.
+     *
+     * @return int Score weight.
+     */
     public function get_weight(): int {
         return self::WEIGHT;
     }
 
     /**
+     * Return formatted activity names.
+     *
      * @param array $cms Course-module information objects.
      * @return string Formatted activity names.
      */
@@ -111,10 +125,20 @@ final class quiz_question_randomisation implements checker {
         return implode(', ', $names);
     }
 
-    /** @return result */
+    /**
+     * Create a not-applicable result.
+     *
+     * @param string $title Result title.
+     * @return result Not-applicable check result.
+     */
     private function not_applicable(string $title): result {
-        return new result(false, result::STATUS_NOT_APPLICABLE, result::SEVERITY_RECOMMENDATION, $title,
+        return new result(
+            false,
+            result::STATUS_NOT_APPLICABLE,
+            result::SEVERITY_RECOMMENDATION,
+            $title,
             get_string('check:randomisation:notapplicable:explanation', 'local_coursecoach'),
-            get_string('check:randomisation:notapplicable:recommendation', 'local_coursecoach'));
+            get_string('check:randomisation:notapplicable:recommendation', 'local_coursecoach')
+        );
     }
 }

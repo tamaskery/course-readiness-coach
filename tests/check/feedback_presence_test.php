@@ -5,6 +5,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for the feedback presence check.
@@ -18,9 +26,15 @@ namespace local_coursecoach\check;
 
 use advanced_testcase;
 
-/** @covers \local_coursecoach\check\feedback_presence */
+/**
+ * Tests the feedback presence checker.
+ *
+ * @covers \local_coursecoach\check\feedback_presence
+ */
 final class feedback_presence_test extends advanced_testcase {
-    /** Test visible Feedback passes. */
+    /**
+     * Test visible Feedback passes.
+     */
     public function test_visible_feedback_passes(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);
@@ -29,7 +43,9 @@ final class feedback_presence_test extends advanced_testcase {
         $this->assertSame(result::STATUS_PASSED, (new feedback_presence())->check($course)->get_status());
     }
 
-    /** Test no Feedback warns. */
+    /**
+     * Test no Feedback warns.
+     */
     public function test_no_feedback_warns(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);
@@ -37,7 +53,9 @@ final class feedback_presence_test extends advanced_testcase {
         $this->assertSame(result::STATUS_WARNING, (new feedback_presence())->check($course)->get_status());
     }
 
-    /** Test hidden Feedback does not count as available. */
+    /**
+     * Test hidden Feedback does not count as available.
+     */
     public function test_hidden_feedback_warns(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0]);

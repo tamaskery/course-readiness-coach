@@ -5,6 +5,14 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for quiz question randomisation.
@@ -19,12 +27,18 @@ namespace local_coursecoach\check;
 use advanced_testcase;
 use mod_quiz\quiz_settings;
 
-/** @covers \local_coursecoach\check\quiz_question_randomisation */
+/**
+ * Tests the quiz question randomisation checker.
+ *
+ * @covers \local_coursecoach\check\quiz_question_randomisation
+ */
 final class quiz_question_randomisation_test extends advanced_testcase {
     /** @var \stdClass|null Quiz created for the current test. */
     private ?\stdClass $quiz = null;
 
-    /** Set up completion tracking. */
+    /**
+     * Set up completion tracking.
+     */
     protected function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
@@ -32,7 +46,9 @@ final class quiz_question_randomisation_test extends advanced_testcase {
         set_config('enablecompletion', 1);
     }
 
-    /** Test a completion quiz with a random question passes. */
+    /**
+     * Test a completion quiz with a random question passes.
+     */
     public function test_random_completion_quiz_passes(): void {
         $course = $this->create_course_with_quiz();
         $quiz = $this->quiz;
@@ -51,14 +67,18 @@ final class quiz_question_randomisation_test extends advanced_testcase {
         $this->assertSame(result::STATUS_PASSED, (new quiz_question_randomisation())->check($course)->get_status());
     }
 
-    /** Test a completion quiz with only fixed questions warns. */
+    /**
+     * Test a completion quiz with only fixed questions warns.
+     */
     public function test_fixed_completion_quiz_warns(): void {
         $course = $this->create_course_with_quiz();
 
         $this->assertSame(result::STATUS_WARNING, (new quiz_question_randomisation())->check($course)->get_status());
     }
 
-    /** Test an unrelated quiz is not assessed. */
+    /**
+     * Test an unrelated quiz is not assessed.
+     */
     public function test_unrelated_quiz_is_not_applicable(): void {
         $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1, 'newsitems' => 0]);
         $this->getDataGenerator()->create_module('quiz', ['course' => $course->id]);
@@ -66,7 +86,9 @@ final class quiz_question_randomisation_test extends advanced_testcase {
         $this->assertSame(result::STATUS_NOT_APPLICABLE, (new quiz_question_randomisation())->check($course)->get_status());
     }
 
-    /** Test no completion-relevant quiz is not applicable. */
+    /**
+     * Test no completion-relevant quiz is not applicable.
+     */
     public function test_no_relevant_quiz_is_not_applicable(): void {
         $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1, 'newsitems' => 0]);
 
@@ -93,5 +115,4 @@ final class quiz_question_randomisation_test extends advanced_testcase {
 
         return $course;
     }
-
 }
