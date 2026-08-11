@@ -24,7 +24,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        moodle-branch: [MOODLE_405_STABLE, MOODLE_502_STABLE]
+        include:
+          - moodle-branch: MOODLE_405_STABLE
+            php-version: '8.2'
+          - moodle-branch: MOODLE_502_STABLE
+            php-version: '8.3'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,8 +37,9 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: ${{ matrix.php-version }}
           extensions: mysqli
+          ini-values: max_input_vars=5000
           coverage: none
       - name: Initialise Moodle Plugin CI
         run: |
