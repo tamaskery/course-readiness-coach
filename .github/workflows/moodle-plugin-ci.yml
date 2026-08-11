@@ -41,6 +41,10 @@ jobs:
           extensions: mysqli
           ini-values: max_input_vars=5000
           coverage: none
+      - name: Set up Moodle PHPUnit locale
+        run: |
+          sudo locale-gen en_AU.UTF-8
+          locale -a | grep -Eqi '^en_AU\.utf-?8$'
       - name: Initialise Moodle Plugin CI
         run: |
           composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
