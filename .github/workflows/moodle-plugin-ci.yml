@@ -24,7 +24,7 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: moodle
+          POSTGRES_DB: postgres
           POSTGRES_USER: moodle
           POSTGRES_PASSWORD: moodle
         ports:
