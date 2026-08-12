@@ -37,9 +37,11 @@ final class quiz_pass_completion_test extends advanced_testcase {
      * Enable completion tracking for each test.
      */
     protected function setUp(): void {
+        global $CFG;
+
         parent::setUp();
         $this->resetAfterTest();
-        set_config('enablecompletion', 1);
+        $CFG->enablecompletion = true;
     }
 
     /**
@@ -120,7 +122,6 @@ final class quiz_pass_completion_test extends advanced_testcase {
             'name' => 'Final quiz',
             'completion' => $requirepass ? COMPLETION_TRACKING_AUTOMATIC : COMPLETION_TRACKING_MANUAL,
             'completionusegrade' => $requirepass ? 1 : 0,
-            'completiongradeitemnumber' => $requirepass ? 0 : null,
             'completionpassgrade' => $requirepass ? 1 : 0,
         ]);
         $gradeitem = grade_item::fetch([
