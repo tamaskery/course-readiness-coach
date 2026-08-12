@@ -49,3 +49,7 @@ vendor/bin/phpcs --standard=moodle local/coursecoach
 ```
 
 Course Readiness Coach is licensed under the GNU GPL v3 or later.
+
+## Support
+
+Report bugs or request improvements through the [GitHub issue tracker](https://github.com/tamaskery/course-readiness-coach/issues).

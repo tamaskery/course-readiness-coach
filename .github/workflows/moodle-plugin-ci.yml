@@ -21,16 +21,44 @@ jobs:
         options: >-
           --health-cmd="healthcheck.sh --connect --innodb_initialized"
           --health-interval 10s --health-timeout 5s --health-retries 3
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: moodle
+          POSTGRES_USER: moodle
+          POSTGRES_PASSWORD: moodle
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U moodle -d moodle"
+          --health-interval 10s --health-timeout 5s --health-retries 3
     strategy:
       fail-fast: false
       matrix:
         include:
           - moodle-branch: MOODLE_405_STABLE
             php-version: '8.2'
+            database: mariadb
+            db-host: 127.0.0.1
+            db-port: 3306
+            db-user: root
+            db-pass: ''
           - moodle-branch: MOODLE_502_STABLE
             php-version: '8.3'
+            database: mariadb
+            db-host: 127.0.0.1
+            db-port: 3306
+            db-user: root
+            db-pass: ''
+          - moodle-branch: MOODLE_502_STABLE
+            php-version: '8.3'
+            database: pgsql
+            db-host: 127.0.0.1
+            db-port: 5432
+            db-user: moodle
+            db-pass: moodle
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           path: plugin
           persist-credentials: false
@@ -38,7 +66,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mysqli
+          extensions: mysqli, pgsql
           ini-values: max_input_vars=5000
           coverage: none
       - name: Set up Moodle PHPUnit locale
@@ -51,9 +79,13 @@ jobs:
           echo "$(cd ci/bin && pwd)" >> "$GITHUB_PATH"
           echo "$(cd ci/vendor/bin && pwd)" >> "$GITHUB_PATH"
       - name: Install Moodle and plugin
-        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
+        run: >-
+          moodle-plugin-ci install --plugin ./plugin
+          --db-host=${{ matrix.db-host }} --db-port=${{ matrix.db-port }}
         env:
-          DB: mariadb
+          DB: ${{ matrix.database }}
+          DB_USER: ${{ matrix.db-user }}
+          DB_PASS: ${{ matrix.db-pass }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
       - name: PHP lint
         run: moodle-plugin-ci phplint
@@ -68,7 +100,7 @@ jobs:
     name: Installable package layout
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Verify the Moodle plugin archive layout
         run: |
           mkdir -p build/coursecoach
@@ -76,4 +108,8 @@ jobs:
           test -f build/coursecoach/version.php
           grep -q "\$plugin->component = 'local_coursecoach';" build/coursecoach/version.php
           (cd build && zip -qr coursecoach.zip coursecoach)
-          unzip -Z1 build/coursecoach.zip | grep -qx 'coursecoach/version.php'
+          entries="$(unzip -Z1 build/coursecoach.zip)"
+          test "$(printf '%s\n' "$entries" | awk -F/ 'NF {print $1}' | sort -u | wc -l)" -eq 1
+          printf '%s\n' "$entries" | grep -qx 'coursecoach/version.php'
+          ! printf '%s\n' "$entries" | grep -Eq '^coursecoach/(\.git|\.github|AGENTS\.md)(/|$)'
+          ! printf '%s\n' "$entries" | grep -Eqi '^coursecoach/([^/]+/)*(\.env|.*\.(key|pem|zip|tmp|swp)|(credentials?|secrets?)([._-].*)?|\.vscode|\.idea|build)(/|$)'
