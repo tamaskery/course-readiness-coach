@@ -2,7 +2,7 @@
 
 > Check whether your Moodle course is ready for learners.
 
-Course Readiness Coach (`local_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.4.0** supports Moodle 4.5 through 5.2.
+Course Readiness Coach (`local_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.5.0** supports Moodle 4.5 through 5.2.
 
 ## Installation and access
 
@@ -12,7 +12,7 @@ The analysis never changes course settings, creates learner completion records, 
 
 ## Readiness checks
 
-The report provides a readiness score, overall status, and Moodle settings links where applicable. It currently checks:
+The report prioritises issues that need attention, provides a readiness score and overall status, and links to Moodle settings where applicable. It currently checks:
 
 1. Course visibility
 2. Course date sanity
