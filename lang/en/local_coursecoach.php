@@ -23,6 +23,7 @@
  */
 
 $string['action:activitycompletion'] = 'Configure activity completion';
+$string['action:activitydates'] = 'Review activity dates';
 $string['action:completion'] = 'Configure course completion';
 $string['action:dates'] = 'Edit course dates';
 $string['action:feedback'] = 'Make Feedback activity available';
@@ -31,6 +32,13 @@ $string['action:quizquestions'] = 'Edit quiz questions';
 $string['action:requiredactivity'] = 'Make required activity available';
 $string['action:section'] = 'Edit course section';
 $string['action:visibility'] = 'Edit course visibility';
+$string['check:activitydates:notapplicable:explanation'] = 'No visible Quiz or Assignment has a user-independent date that can be compared with a configured course boundary.';
+$string['check:activitydates:notapplicable:recommendation'] = 'No activity date change is needed for this check.';
+$string['check:activitydates:passed:explanation'] = 'The evaluated Quiz and Assignment dates contain no high-confidence course timeline mismatch.';
+$string['check:activitydates:passed:recommendation'] = 'No activity date change is needed.';
+$string['check:activitydates:title'] = 'Activity date alignment';
+$string['check:activitydates:warning:explanation'] = 'Some activities are scheduled entirely outside the configured course timeline: {$a}.';
+$string['check:activitydates:warning:recommendation'] = 'Review the activity dates and course dates to confirm that the schedule is intentional.';
 $string['check:completion:configured:explanation'] = 'Course completion is enabled and has usable completion criteria.';
 $string['check:completion:configured:recommendation'] = 'Review the criteria to confirm that they match the intended course requirements.';
 $string['check:completion:disabled:explanation'] = 'Course completion is disabled, so Moodle cannot determine when a learner has completed this course.';

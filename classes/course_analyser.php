@@ -25,6 +25,7 @@
 namespace local_coursecoach;
 
 use coding_exception;
+use local_coursecoach\check\activity_date_alignment;
 use local_coursecoach\check\activity_completion_coverage;
 use local_coursecoach\check\checker;
 use local_coursecoach\check\course_completion;
@@ -60,6 +61,7 @@ final class course_analyser {
             new quiz_question_randomisation(),
             new feedback_presence(),
             new incomplete_content(),
+            new activity_date_alignment(),
         ];
 
         foreach ($this->checkers as $checker) {

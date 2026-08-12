@@ -2,7 +2,7 @@
 
 > Check whether your Moodle course is ready for learners.
 
-Course Readiness Coach (`local_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.3.0** supports Moodle 4.5 through 5.2.
+Course Readiness Coach (`local_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.4.0** supports Moodle 4.5 through 5.2.
 
 ## Installation and access
 
@@ -23,6 +23,7 @@ The report provides a readiness score, overall status, and Moodle settings links
 7. Quiz question randomisation
 8. Feedback/evaluation presence
 9. Incomplete course content
+10. Activity date alignment
 
 Only applicable checks contribute to the 0–100 score. Passed checks receive full credit, warnings half credit, and critical issues no credit. A critical issue always results in **Not ready**.
 
@@ -35,6 +36,7 @@ Course Readiness Coach flags configurations that are very likely accidental or p
 - Quiz randomisation detects Moodle random-question selection, not broader pedagogical variation.
 - Feedback detection covers standard Moodle Feedback activities.
 - Incomplete-content detection covers visible empty non-general sections.
+- Activity date alignment checks only high-confidence Quiz and Assignment timeline mismatches. Course dates are not treated as hard access boundaries, relative Assignment dates are skipped, and learner-specific availability is not analysed.
 - It does not crawl external links for breakage.
 
 ## Development checks
