@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_coursecoach';
-$plugin->version = 2026081201;
+$plugin->version = 2026081202;
 $plugin->requires = 2024100700;
 $plugin->supported = [405, 502];
 $plugin->maturity = MATURITY_ALPHA;
-$plugin->release = '0.4.0';
+$plugin->release = '0.5.0';

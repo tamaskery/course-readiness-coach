@@ -55,12 +55,20 @@ final class report implements renderable, templatable {
     public function export_for_template(renderer_base $output): array {
         unset($output);
 
-        $checks = [];
+        $criticalchecks = [];
+        $warningchecks = [];
+        $passedchecks = [];
+        $notapplicablechecks = [];
+        $assessedcount = 0;
         foreach ($this->readiness->get_results() as $index => $weightedresult) {
             $result = $weightedresult->get_result();
             $settingsurl = $result->get_settings_url();
             $actionlabel = $result->get_action_label();
-            $checks[] = [
+            $isissue = in_array($result->get_status(), [result::STATUS_CRITICAL, result::STATUS_WARNING], true);
+            if ($result->is_applicable()) {
+                $assessedcount++;
+            }
+            $check = [
                 'index' => $index,
                 'applicability' => $result->is_applicable(),
                 'status' => $result->get_status(),
@@ -70,23 +78,49 @@ final class report implements renderable, templatable {
                 'title' => $result->get_title(),
                 'explanation' => $result->get_explanation(),
                 'recommendation' => $result->get_recommendation(),
-                'hassettingsurl' => $settingsurl !== null && $actionlabel !== null &&
-                    $result->get_status() !== result::STATUS_PASSED,
+                'showrecommendation' => $isissue,
+                'hassettingsurl' => $isissue && $settingsurl !== null && $actionlabel !== null,
                 'settingsurl' => $settingsurl ? $settingsurl->out(false) : '',
                 'actionlabel' => $actionlabel ?? '',
             ];
+
+            switch ($result->get_status()) {
+                case result::STATUS_CRITICAL:
+                    $criticalchecks[] = $check;
+                    break;
+                case result::STATUS_WARNING:
+                    $warningchecks[] = $check;
+                    break;
+                case result::STATUS_PASSED:
+                    $passedchecks[] = $check;
+                    break;
+                case result::STATUS_NOT_APPLICABLE:
+                    $notapplicablechecks[] = $check;
+                    break;
+            }
         }
 
         $score = $this->readiness->get_score();
+        $totalcount = count($this->readiness->get_results());
         return [
             'score' => $score,
-            'scorelabel' => get_string('scoreoutof', 'local_coursecoach', $score),
             'readinesslabel' => $this->get_readiness_label(),
             'readinessclass' => $this->get_readiness_class(),
             'passedcount' => $this->readiness->get_passed_count(),
             'warningcount' => $this->readiness->get_warning_count(),
             'criticalcount' => $this->readiness->get_critical_count(),
-            'checks' => $checks,
+            'assessedcount' => $assessedcount,
+            'totalcount' => $totalcount,
+            'assessedchecks' => get_string('assessedchecks', 'local_coursecoach', (object) [
+                'assessed' => $assessedcount,
+                'total' => $totalcount,
+            ]),
+            'hasissues' => !empty($criticalchecks) || !empty($warningchecks),
+            'issues' => array_merge($criticalchecks, $warningchecks),
+            'haspassedchecks' => !empty($passedchecks),
+            'passedchecks' => $passedchecks,
+            'hasnotapplicablechecks' => !empty($notapplicablechecks),
+            'notapplicablechecks' => $notapplicablechecks,
         ];
     }
 
