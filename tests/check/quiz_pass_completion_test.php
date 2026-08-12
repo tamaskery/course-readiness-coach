@@ -119,7 +119,6 @@ final class quiz_pass_completion_test extends advanced_testcase {
             'gradepass' => $gradepass,
             'completion' => $requirepass ? COMPLETION_TRACKING_AUTOMATIC : COMPLETION_TRACKING_MANUAL,
             'completionusegrade' => $requirepass ? 1 : 0,
-            'completiongradeitemnumber' => $requirepass ? 0 : null,
             'completionpassgrade' => $requirepass ? 1 : 0,
         ]);
         $data = (object) [
