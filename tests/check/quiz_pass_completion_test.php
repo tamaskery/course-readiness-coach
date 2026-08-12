@@ -25,6 +25,7 @@
 namespace local_coursecoach\check;
 
 use advanced_testcase;
+use grade_item;
 
 /**
  * Tests completion-path quizzes using Moodle generators and grade settings.
@@ -111,16 +112,26 @@ final class quiz_pass_completion_test extends advanced_testcase {
         global $CFG;
 
         require_once($CFG->dirroot . '/completion/criteria/completion_criteria_activity.php');
+        require_once($CFG->libdir . '/gradelib.php');
 
         $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1, 'newsitems' => 0]);
         $quiz = $this->getDataGenerator()->create_module('quiz', [
             'course' => $course->id,
             'name' => 'Final quiz',
-            'gradepass' => $gradepass,
             'completion' => $requirepass ? COMPLETION_TRACKING_AUTOMATIC : COMPLETION_TRACKING_MANUAL,
             'completionusegrade' => $requirepass ? 1 : 0,
+            'completiongradeitemnumber' => $requirepass ? 0 : null,
             'completionpassgrade' => $requirepass ? 1 : 0,
         ]);
+        $gradeitem = grade_item::fetch([
+            'courseid' => $course->id,
+            'itemtype' => 'mod',
+            'itemmodule' => 'quiz',
+            'iteminstance' => $quiz->id,
+            'itemnumber' => 0,
+        ]);
+        $gradeitem->gradepass = $gradepass;
+        $gradeitem->update();
         $data = (object) [
             'id' => $course->id,
             'criteria_activity' => [$quiz->cmid => 1],
