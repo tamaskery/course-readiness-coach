@@ -54,9 +54,11 @@ final class course_dates_test extends advanced_testcase {
     public function test_invalid_date_combination_is_critical(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course([
-            'startdate' => 2_000,
-            'enddate' => 1_000,
+            'startdate' => 1_000,
+            'enddate' => 2_000,
         ]);
+        $course->startdate = 2_000;
+        $course->enddate = 1_000;
 
         $result = (new course_dates(1_500))->check($course);
 

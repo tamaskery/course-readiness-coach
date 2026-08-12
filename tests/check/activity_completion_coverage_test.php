@@ -38,6 +38,7 @@ final class activity_completion_coverage_test extends advanced_testcase {
     protected function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
+        $this->setAdminUser();
         set_config('enablecompletion', 1);
     }
 

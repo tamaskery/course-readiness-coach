@@ -69,7 +69,7 @@ final class quiz_question_randomisation implements checker {
             $structure = quiz_settings::create($cm->instance)->get_structure();
             $random = false;
             foreach ($structure->get_slots() as $slot) {
-                if ($structure->get_question_type_for_slot($slot->slot) === 'random') {
+                if (!empty($slot->random) || $structure->get_question_type_for_slot($slot->slot) === 'random') {
                     $random = true;
                     break;
                 }
