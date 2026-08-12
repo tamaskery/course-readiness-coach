@@ -7,7 +7,7 @@ on:
 
 jobs:
   quality:
-    name: Moodle ${{ matrix.moodle-branch }}
+    name: Moodle ${{ matrix.moodle-branch }} / ${{ matrix.database }}
     runs-on: ubuntu-24.04
     services:
       mariadb:
@@ -30,7 +30,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U moodle -d moodle"
+          --health-cmd="pg_isready -U moodle -d postgres"
           --health-interval 10s --health-timeout 5s --health-retries 3
     strategy:
       fail-fast: false
@@ -112,4 +112,4 @@ jobs:
           test "$(printf '%s\n' "$entries" | awk -F/ 'NF {print $1}' | sort -u | wc -l)" -eq 1
           printf '%s\n' "$entries" | grep -qx 'coursecoach/version.php'
           ! printf '%s\n' "$entries" | grep -Eq '^coursecoach/(\.git|\.github|AGENTS\.md)(/|$)'
-          ! printf '%s\n' "$entries" | grep -Eqi '^coursecoach/([^/]+/)*(\.env|.*\.(key|pem|zip|tmp|swp)|(credentials?|secrets?)([._-].*)?|\.vscode|\.idea|build)(/|$)'
+          ! printf '%s\n' "$entries" | grep -Eqi '^coursecoach/([^/]+/)*(\.env(\.[^/]*)?|\.DS_Store|Thumbs\.db|.*\.(key|pem|zip|tmp|swp)|(credentials?|secrets?)([._-].*)?|\.vscode|\.idea|build)(/|$)'
