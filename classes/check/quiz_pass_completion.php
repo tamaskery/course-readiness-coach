@@ -87,7 +87,7 @@ final class quiz_pass_completion implements checker {
             }
 
             if (
-                $completioninfo->is_enabled($cm) !== COMPLETION_TRACKING_AUTOMATIC ||
+                (int) $completioninfo->is_enabled($cm) !== COMPLETION_TRACKING_AUTOMATIC ||
                 empty($cm->completionpassgrade)
             ) {
                 $withoutpasscompletion[] = $cm;
