@@ -70,9 +70,9 @@ final class readiness_calculator_test extends advanced_testcase {
     }
 
     /**
-     * Test the nine-check configuration produces a full readiness score.
+     * Test the ten-check configuration produces a full readiness score.
      */
-    public function test_nine_check_weights_all_pass(): void {
+    public function test_ten_check_weights_all_pass(): void {
         $calculator = new readiness_calculator();
         $results = [
             new weighted_result($this->make_result(result::STATUS_PASSED), 1),
@@ -84,12 +84,13 @@ final class readiness_calculator_test extends advanced_testcase {
             new weighted_result($this->make_result(result::STATUS_PASSED), 1),
             new weighted_result($this->make_result(result::STATUS_PASSED), 3),
             new weighted_result($this->make_result(result::STATUS_PASSED), 2),
+            new weighted_result($this->make_result(result::STATUS_PASSED), 1),
         ];
 
         $readiness = $calculator->calculate($results);
 
         $this->assertSame(100, $readiness->get_score());
-        $this->assertSame(9, $readiness->get_passed_count());
+        $this->assertSame(10, $readiness->get_passed_count());
         $this->assertSame(readiness::LABEL_READY, $readiness->get_label());
     }
 
