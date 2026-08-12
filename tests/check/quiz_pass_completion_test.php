@@ -51,7 +51,7 @@ final class quiz_pass_completion_test extends advanced_testcase {
         $result = (new quiz_pass_completion())->check($course);
 
         $this->assertTrue($result->is_applicable());
-        $this->assertSame(result::STATUS_PASSED, $result->get_status());
+        $this->assertSame(result::STATUS_PASSED, $result->get_status(), $result->get_explanation());
     }
 
     /**
