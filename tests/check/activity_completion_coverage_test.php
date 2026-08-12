@@ -76,32 +76,17 @@ final class activity_completion_coverage_test extends advanced_testcase {
 
     /**
      * Test passive resources are not flagged solely because they track views.
-     *
-     * @dataProvider passive_resource_provider
-     * @param string $modname Moodle module name.
      */
-    public function test_passive_resource_does_not_create_warning(string $modname): void {
-        $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1, 'newsitems' => 0]);
-        $this->getDataGenerator()->create_module($modname, ['course' => $course->id]);
+    public function test_passive_resources_do_not_create_warning(): void {
+        foreach (['page', 'url', 'folder', 'resource'] as $modname) {
+            $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1, 'newsitems' => 0]);
+            $this->getDataGenerator()->create_module($modname, ['course' => $course->id]);
 
-        $result = (new activity_completion_coverage())->check($course);
+            $result = (new activity_completion_coverage())->check($course);
 
-        $this->assertFalse($result->is_applicable());
-        $this->assertSame(result::STATUS_NOT_APPLICABLE, $result->get_status());
-    }
-
-    /**
-     * Return passive resource module names.
-     *
-     * @return array Test data.
-     */
-    public static function passive_resource_provider(): array {
-        return [
-            'page' => ['page'],
-            'url' => ['url'],
-            'folder' => ['folder'],
-            'resource' => ['resource'],
-        ];
+            $this->assertFalse($result->is_applicable(), $modname);
+            $this->assertSame(result::STATUS_NOT_APPLICABLE, $result->get_status(), $modname);
+        }
     }
 
     /**
