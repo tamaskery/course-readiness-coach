@@ -1,20 +1,41 @@
 # Course Readiness Coach
 
-Course Readiness Coach (`local_coursecoach`) is a read-only Moodle course-readiness report for Moodle 4.5 through 5.2.
-
 > Check whether your Moodle course is ready for learners.
 
-Current release: **0.3.0**.
+Course Readiness Coach (`local_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.3.0** supports Moodle 4.5 through 5.2.
 
-## Installation
+## Installation and access
 
-Place this directory at `local/coursecoach` in a supported Moodle checkout, then complete the standard Moodle plugin upgrade process. Editing teachers and managers receive `local/coursecoach:view` by default.
+Install the plugin directory at `local/coursecoach`, then complete Moodle's standard plugin upgrade. The report is available in course navigation to users with `local/coursecoach:view`; editing teachers and managers receive this capability by default.
 
-## Scoring
+The analysis never changes course settings, creates learner completion records, analyses learner data, or calls external APIs or AI services.
 
-Only applicable checks contribute to the 0-100 score. Passed checks receive full credit, warnings receive half credit, and critical issues receive no credit. The weights are: visibility 1, dates 1, course completion 3, activity completion coverage 2, required activity availability 3, quiz pass/completion 2, quiz randomisation 1, learner feedback 1, and incomplete content 1. Any critical result labels the course **Not ready** regardless of its numerical score.
+## Readiness checks
 
-Required activity availability is intentionally conservative: it reports only activities required for course completion that are hidden. Learner-specific availability restrictions are not evaluated.
+The report provides a readiness score, overall status, and Moodle settings links where applicable. It currently checks:
+
+1. Course visibility
+2. Course date sanity
+3. Course completion configuration
+4. Activity completion coverage
+5. Required completion activity accessibility
+6. Quiz pass/completion configuration
+7. Quiz question randomisation
+8. Feedback/evaluation presence
+9. Incomplete course content
+
+Only applicable checks contribute to the 0–100 score. Passed checks receive full credit, warnings half credit, and critical issues no credit. A critical issue always results in **Not ready**.
+
+## Conservative scope and limitations
+
+Course Readiness Coach flags configurations that are very likely accidental or problematic; it does not impose a pedagogical model. False positives are treated as worse than marginal missed recommendations.
+
+- Activity completion coverage is deliberately conservative and does not treat passive view-trackable resources as needing completion.
+- Accessibility detection covers deterministic hidden activities required for course completion, not learner-specific restrictions.
+- Quiz randomisation detects Moodle random-question selection, not broader pedagogical variation.
+- Feedback detection covers standard Moodle Feedback activities.
+- Incomplete-content detection covers visible empty non-general sections.
+- It does not crawl external links for breakage.
 
 ## Development checks
 
