@@ -120,7 +120,7 @@ final class quiz_question_randomisation implements checker {
     private function names(array $cms): string {
         $names = [];
         foreach ($cms as $cm) {
-            $names[] = format_string($cm->name, true, ['context' => $cm->context]);
+            $names[] = name_formatter::activity($cm);
         }
         return implode(', ', $names);
     }

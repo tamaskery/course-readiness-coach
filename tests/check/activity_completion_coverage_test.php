@@ -65,13 +65,14 @@ final class activity_completion_coverage_test extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1, 'newsitems' => 0]);
         $assignment = $this->getDataGenerator()->create_module('assign', [
             'course' => $course->id,
-            'name' => 'Final assignment',
+            'name' => 'Reading & Writing',
         ]);
 
         $result = (new activity_completion_coverage())->check($course);
 
         $this->assertSame(result::STATUS_WARNING, $result->get_status());
         $this->assertStringContainsString($assignment->name, $result->get_explanation());
+        $this->assertStringNotContainsString('Reading &amp; Writing', $result->get_explanation());
     }
 
     /**

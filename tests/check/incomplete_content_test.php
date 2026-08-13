@@ -38,9 +38,17 @@ final class incomplete_content_test extends advanced_testcase {
     public function test_visible_empty_section_warns(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0, 'numsections' => 1]);
-        $this->getDataGenerator()->create_course_section(['course' => $course->id, 'section' => 1]);
+        $this->getDataGenerator()->create_course_section([
+            'course' => $course->id,
+            'section' => 1,
+            'name' => 'Research & Writing',
+        ]);
 
-        $this->assertSame(result::STATUS_WARNING, (new incomplete_content())->check($course)->get_status());
+        $result = (new incomplete_content())->check($course);
+
+        $this->assertSame(result::STATUS_WARNING, $result->get_status());
+        $this->assertStringContainsString('Research & Writing', $result->get_explanation());
+        $this->assertStringNotContainsString('Research &amp; Writing', $result->get_explanation());
     }
 
     /**

@@ -145,6 +145,26 @@ final class report_test extends advanced_testcase {
     }
 
     /**
+     * Test normal Mustache variables safely perform the final HTML escaping.
+     */
+    public function test_report_template_safely_escapes_semantic_text(): void {
+        global $PAGE;
+
+        $this->resetAfterTest();
+        $PAGE->set_url(new moodle_url('/'));
+        $renderer = $PAGE->get_renderer('core');
+        $data = $this->export([
+            $this->make_result('Research <Draft> & Review', result::STATUS_WARNING),
+        ]);
+
+        $html = $renderer->render_from_template('local_coursecoach/report', $data);
+
+        $this->assertStringContainsString('Research &lt;Draft&gt; &amp; Review', $html);
+        $this->assertStringNotContainsString('Research <Draft> & Review', $html);
+        $this->assertStringNotContainsString('&amp;amp;', $html);
+    }
+
+    /**
      * Export template data for supplied results.
      *
      * @param result[] $results Check results in analyser order.
