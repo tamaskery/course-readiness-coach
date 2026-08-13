@@ -38,11 +38,8 @@ final class incomplete_content_test extends advanced_testcase {
     public function test_visible_empty_section_warns(): void {
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course(['newsitems' => 0, 'numsections' => 1]);
-        $this->getDataGenerator()->create_course_section([
-            'course' => $course->id,
-            'section' => 1,
-            'name' => 'Research & Writing',
-        ]);
+        $section = get_fast_modinfo($course)->get_section_info(1);
+        course_update_section($course->id, $section, ['name' => 'Research & Writing']);
 
         $result = (new incomplete_content())->check($course);
 
