@@ -17,20 +17,20 @@
 /**
  * Tests for the readiness score calculator.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach;
+namespace report_coursecoach;
 
 use advanced_testcase;
-use local_coursecoach\check\result;
+use report_coursecoach\check\result;
 
 /**
  * Tests scoring independently of presentation.
  *
- * @covers \local_coursecoach\readiness_calculator
+ * @covers \report_coursecoach\readiness_calculator
  */
 final class readiness_calculator_test extends advanced_testcase {
     /**

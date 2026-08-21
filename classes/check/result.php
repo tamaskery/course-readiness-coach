@@ -17,12 +17,12 @@
 /**
  * Value object representing one Course Coach check result.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use coding_exception;
 use moodle_url;

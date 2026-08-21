@@ -17,12 +17,12 @@
 /**
  * Course readiness analysis value object.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach;
+namespace report_coursecoach;
 
 /**
  * Contains calculated readiness and the underlying checker results.

@@ -17,7 +17,7 @@
 /**
  * Course Readiness Coach report page.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,23 +27,23 @@ require_once(__DIR__ . '/../../config.php');
 $courseid = required_param('id', PARAM_INT);
 $course = get_course($courseid);
 $context = context_course::instance($course->id);
-$url = new moodle_url('/local/coursecoach/report.php', ['id' => $course->id]);
+$url = new moodle_url('/report/coursecoach/index.php', ['id' => $course->id]);
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 require_login($course);
-require_capability('local/coursecoach:view', $context);
+require_capability('report/coursecoach:view', $context);
 
-$title = get_string('reporttitle', 'local_coursecoach');
-$PAGE->set_pagelayout('incourse');
+$title = get_string('reporttitle', 'report_coursecoach');
+$PAGE->set_pagelayout('report');
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $PAGE->navbar->add($title, $url);
 
-$analyser = new \local_coursecoach\course_analyser();
+$analyser = new \report_coursecoach\course_analyser();
 $readiness = $analyser->analyse($course);
-$report = new \local_coursecoach\output\report($readiness);
-$renderer = $PAGE->get_renderer('local_coursecoach');
+$report = new \report_coursecoach\output\report($readiness);
+$renderer = $PAGE->get_renderer('report_coursecoach');
 
 echo $OUTPUT->header();
 echo $renderer->render($report);

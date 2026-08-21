@@ -17,12 +17,12 @@
 /**
  * Required completion activity accessibility check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use completion_info;
 use moodle_url;
@@ -48,7 +48,7 @@ final class required_completion_activity_accessibility implements checker {
 
         require_once($CFG->libdir . '/completionlib.php');
 
-        $title = get_string('check:requiredactivity:title', 'local_coursecoach');
+        $title = get_string('check:requiredactivity:title', 'report_coursecoach');
         $completioninfo = new completion_info($course);
         if (!$completioninfo->is_enabled()) {
             return $this->not_applicable($title, 'check:requiredactivity:disabled');
@@ -84,10 +84,10 @@ final class required_completion_activity_accessibility implements checker {
                 result::STATUS_CRITICAL,
                 result::SEVERITY_CRITICAL,
                 $title,
-                get_string('check:requiredactivity:hidden:explanation', 'local_coursecoach', $this->activity_names($hidden)),
-                get_string('check:requiredactivity:hidden:recommendation', 'local_coursecoach'),
+                get_string('check:requiredactivity:hidden:explanation', 'report_coursecoach', $this->activity_names($hidden)),
+                get_string('check:requiredactivity:hidden:recommendation', 'report_coursecoach'),
                 new moodle_url('/course/modedit.php', ['update' => $hidden[0]->id, 'return' => 0]),
-                get_string('action:requiredactivity', 'local_coursecoach')
+                get_string('action:requiredactivity', 'report_coursecoach')
             );
         }
 
@@ -96,8 +96,8 @@ final class required_completion_activity_accessibility implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:requiredactivity:passed:explanation', 'local_coursecoach'),
-            get_string('check:requiredactivity:passed:recommendation', 'local_coursecoach')
+            get_string('check:requiredactivity:passed:explanation', 'report_coursecoach'),
+            get_string('check:requiredactivity:passed:recommendation', 'report_coursecoach')
         );
     }
 
@@ -138,8 +138,8 @@ final class required_completion_activity_accessibility implements checker {
             result::STATUS_NOT_APPLICABLE,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string($identifier . ':explanation', 'local_coursecoach'),
-            get_string($identifier . ':recommendation', 'local_coursecoach')
+            get_string($identifier . ':explanation', 'report_coursecoach'),
+            get_string($identifier . ':recommendation', 'report_coursecoach')
         );
     }
 }

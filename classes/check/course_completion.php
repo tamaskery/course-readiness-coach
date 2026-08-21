@@ -17,12 +17,12 @@
 /**
  * Course completion configuration check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use completion_info;
 use moodle_url;
@@ -46,15 +46,15 @@ final class course_completion implements checker {
 
         require_once($CFG->libdir . '/completionlib.php');
 
-        $title = get_string('check:completion:title', 'local_coursecoach');
+        $title = get_string('check:completion:title', 'report_coursecoach');
         if (!completion_info::is_enabled_for_site()) {
             return new result(
                 true,
                 result::STATUS_CRITICAL,
                 result::SEVERITY_CRITICAL,
                 $title,
-                get_string('check:completion:sitedisabled:explanation', 'local_coursecoach'),
-                get_string('check:completion:sitedisabled:recommendation', 'local_coursecoach')
+                get_string('check:completion:sitedisabled:explanation', 'report_coursecoach'),
+                get_string('check:completion:sitedisabled:recommendation', 'report_coursecoach')
             );
         }
 
@@ -65,10 +65,10 @@ final class course_completion implements checker {
                 result::STATUS_CRITICAL,
                 result::SEVERITY_CRITICAL,
                 $title,
-                get_string('check:completion:disabled:explanation', 'local_coursecoach'),
-                get_string('check:completion:disabled:recommendation', 'local_coursecoach'),
+                get_string('check:completion:disabled:explanation', 'report_coursecoach'),
+                get_string('check:completion:disabled:recommendation', 'report_coursecoach'),
                 new moodle_url('/course/edit.php', ['id' => $course->id]),
-                get_string('action:completion', 'local_coursecoach')
+                get_string('action:completion', 'report_coursecoach')
             );
         }
 
@@ -79,10 +79,10 @@ final class course_completion implements checker {
                 result::STATUS_WARNING,
                 result::SEVERITY_IMPORTANT,
                 $title,
-                get_string('check:completion:nocriteria:explanation', 'local_coursecoach'),
-                get_string('check:completion:nocriteria:recommendation', 'local_coursecoach'),
+                get_string('check:completion:nocriteria:explanation', 'report_coursecoach'),
+                get_string('check:completion:nocriteria:recommendation', 'report_coursecoach'),
                 $settingsurl,
-                get_string('action:completion', 'local_coursecoach')
+                get_string('action:completion', 'report_coursecoach')
             );
         }
 
@@ -91,8 +91,8 @@ final class course_completion implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:completion:configured:explanation', 'local_coursecoach'),
-            get_string('check:completion:configured:recommendation', 'local_coursecoach'),
+            get_string('check:completion:configured:explanation', 'report_coursecoach'),
+            get_string('check:completion:configured:recommendation', 'report_coursecoach'),
             $settingsurl
         );
     }

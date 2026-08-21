@@ -17,12 +17,12 @@
 /**
  * Course date sanity check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use moodle_url;
 use stdClass;
@@ -56,7 +56,7 @@ final class course_dates implements checker {
         $startdate = (int) ($course->startdate ?? 0);
         $enddate = (int) ($course->enddate ?? 0);
         $settingsurl = new moodle_url('/course/edit.php', ['id' => $course->id]);
-        $title = get_string('check:dates:title', 'local_coursecoach');
+        $title = get_string('check:dates:title', 'report_coursecoach');
 
         if ($startdate <= 0 && $enddate <= 0) {
             return new result(
@@ -64,8 +64,8 @@ final class course_dates implements checker {
                 result::STATUS_NOT_APPLICABLE,
                 result::SEVERITY_RECOMMENDATION,
                 $title,
-                get_string('check:dates:notapplicable:explanation', 'local_coursecoach'),
-                get_string('check:dates:notapplicable:recommendation', 'local_coursecoach'),
+                get_string('check:dates:notapplicable:explanation', 'report_coursecoach'),
+                get_string('check:dates:notapplicable:recommendation', 'report_coursecoach'),
                 $settingsurl
             );
         }
@@ -80,10 +80,10 @@ final class course_dates implements checker {
                 result::STATUS_CRITICAL,
                 result::SEVERITY_CRITICAL,
                 $title,
-                get_string('check:dates:invalid:explanation', 'local_coursecoach', $dates),
-                get_string('check:dates:invalid:recommendation', 'local_coursecoach'),
+                get_string('check:dates:invalid:explanation', 'report_coursecoach', $dates),
+                get_string('check:dates:invalid:recommendation', 'report_coursecoach'),
                 $settingsurl,
-                get_string('action:dates', 'local_coursecoach')
+                get_string('action:dates', 'report_coursecoach')
             );
         }
 
@@ -94,10 +94,10 @@ final class course_dates implements checker {
                 result::STATUS_WARNING,
                 result::SEVERITY_IMPORTANT,
                 $title,
-                get_string('check:dates:expired:explanation', 'local_coursecoach', userdate($enddate)),
-                get_string('check:dates:expired:recommendation', 'local_coursecoach'),
+                get_string('check:dates:expired:explanation', 'report_coursecoach', userdate($enddate)),
+                get_string('check:dates:expired:recommendation', 'report_coursecoach'),
                 $settingsurl,
-                get_string('action:dates', 'local_coursecoach')
+                get_string('action:dates', 'report_coursecoach')
             );
         }
 
@@ -106,8 +106,8 @@ final class course_dates implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:dates:passed:explanation', 'local_coursecoach'),
-            get_string('check:dates:passed:recommendation', 'local_coursecoach'),
+            get_string('check:dates:passed:explanation', 'report_coursecoach'),
+            get_string('check:dates:passed:recommendation', 'report_coursecoach'),
             $settingsurl
         );
     }

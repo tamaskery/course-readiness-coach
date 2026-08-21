@@ -17,12 +17,12 @@
 /**
  * Incomplete course content check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use moodle_url;
 use stdClass;
@@ -50,17 +50,17 @@ final class incomplete_content implements checker {
             $empty[] = $section;
         }
 
-        $title = get_string('check:incomplete:title', 'local_coursecoach');
+        $title = get_string('check:incomplete:title', 'report_coursecoach');
         if ($empty) {
             return new result(
                 true,
                 result::STATUS_WARNING,
                 result::SEVERITY_RECOMMENDATION,
                 $title,
-                get_string('check:incomplete:warning:explanation', 'local_coursecoach', $this->names($course, $empty)),
-                get_string('check:incomplete:warning:recommendation', 'local_coursecoach'),
+                get_string('check:incomplete:warning:explanation', 'report_coursecoach', $this->names($course, $empty)),
+                get_string('check:incomplete:warning:recommendation', 'report_coursecoach'),
                 new moodle_url('/course/editsection.php', ['id' => $empty[0]->id]),
-                get_string('action:section', 'local_coursecoach')
+                get_string('action:section', 'report_coursecoach')
             );
         }
 
@@ -69,8 +69,8 @@ final class incomplete_content implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:incomplete:passed:explanation', 'local_coursecoach'),
-            get_string('check:incomplete:passed:recommendation', 'local_coursecoach')
+            get_string('check:incomplete:passed:explanation', 'report_coursecoach'),
+            get_string('check:incomplete:passed:recommendation', 'report_coursecoach')
         );
     }
 

@@ -17,12 +17,12 @@
 /**
  * Tests for quiz pass and completion configuration.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 use grade_item;
@@ -30,7 +30,7 @@ use grade_item;
 /**
  * Tests completion-path quizzes using Moodle generators and grade settings.
  *
- * @covers \local_coursecoach\check\quiz_pass_completion
+ * @covers \report_coursecoach\check\quiz_pass_completion
  */
 final class quiz_pass_completion_test extends advanced_testcase {
     /**

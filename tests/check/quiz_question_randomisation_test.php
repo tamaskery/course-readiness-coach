@@ -17,12 +17,12 @@
 /**
  * Tests for quiz question randomisation.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 use mod_quiz\quiz_settings;
@@ -30,7 +30,7 @@ use mod_quiz\quiz_settings;
 /**
  * Tests the quiz question randomisation checker.
  *
- * @covers \local_coursecoach\check\quiz_question_randomisation
+ * @covers \report_coursecoach\check\quiz_question_randomisation
  */
 final class quiz_question_randomisation_test extends advanced_testcase {
     /** @var \stdClass|null Quiz created for the current test. */

@@ -2,11 +2,13 @@
 
 > Check whether your Moodle course is ready for learners.
 
-Course Readiness Coach (`local_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.6.1** supports Moodle 4.5 through 5.2.
+Course Readiness Coach (`report_coursecoach`) is a teacher- and manager-facing, read-only Moodle course-readiness report. Version **0.6.1** supports Moodle 4.5 through 5.2.
 
 ## Installation and access
 
-Install the plugin directory at `local/coursecoach`, then complete Moodle's standard plugin upgrade. The report is available in course navigation to users with `local/coursecoach:view`; editing teachers and managers receive this capability by default.
+Install the plugin directory at `report/coursecoach`, then complete Moodle's standard plugin installation. The report is available in course navigation to users with `report/coursecoach:view`; editing teachers and managers receive this capability by default.
+
+Moodle treats `report_coursecoach` as a different component from the former `local_coursecoach` plugin. Uninstall and remove the former local plugin before installing this report plugin to avoid duplicate navigation entries. Course Readiness Coach owns no database tables or stored report data.
 
 The analysis never changes course settings, creates learner completion records, analyses learner data, or calls external APIs or AI services.
 
@@ -44,8 +46,8 @@ Course Readiness Coach flags configurations that are very likely accidental or p
 From the Moodle root, run:
 
 ```text
-vendor/bin/phpunit local/coursecoach/tests
-vendor/bin/phpcs --standard=moodle local/coursecoach
+vendor/bin/phpunit report/coursecoach/tests
+vendor/bin/phpcs --standard=moodle report/coursecoach
 ```
 
 Course Readiness Coach is licensed under the GNU GPL v3 or later.

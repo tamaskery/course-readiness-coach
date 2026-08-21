@@ -17,17 +17,17 @@
 /**
  * Tests for report output preparation.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\output;
+namespace report_coursecoach\output;
 
 use advanced_testcase;
-use local_coursecoach\check\result;
-use local_coursecoach\readiness_calculator;
-use local_coursecoach\weighted_result;
+use report_coursecoach\check\result;
+use report_coursecoach\readiness_calculator;
+use report_coursecoach\weighted_result;
 use moodle_url;
 use renderer_base;
 
@@ -154,13 +154,13 @@ final class report_test extends advanced_testcase {
         $PAGE->set_url(new moodle_url('/'));
         $renderer = $PAGE->get_renderer('core');
         $data = $this->export([
-            $this->make_result('Research <Draft> & Review', result::STATUS_WARNING),
+            $this->make_result('Research "<Draft>" & Review', result::STATUS_WARNING),
         ]);
 
-        $html = $renderer->render_from_template('local_coursecoach/report', $data);
+        $html = $renderer->render_from_template('report_coursecoach/report', $data);
 
-        $this->assertStringContainsString('Research &lt;Draft&gt; &amp; Review', $html);
-        $this->assertStringNotContainsString('Research <Draft> & Review', $html);
+        $this->assertStringContainsString('Research &quot;&lt;Draft&gt;&quot; &amp; Review', $html);
+        $this->assertStringNotContainsString('Research "<Draft>" & Review', $html);
         $this->assertStringNotContainsString('&amp;amp;', $html);
     }
 

@@ -17,12 +17,12 @@
 /**
  * Renderer for the Course Readiness Coach plugin.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\output;
+namespace report_coursecoach\output;
 
 use plugin_renderer_base;
 
@@ -38,7 +38,7 @@ class renderer extends plugin_renderer_base {
      */
     protected function render_report(report $report): string {
         return $this->render_from_template(
-            'local_coursecoach/report',
+            'report_coursecoach/report',
             $report->export_for_template($this)
         );
     }

@@ -17,12 +17,12 @@
 /**
  * Privacy provider for the Course Coach plugin.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\privacy;
+namespace report_coursecoach\privacy;
 
 use core_privacy\local\metadata\null_provider;
 

@@ -17,12 +17,12 @@
 /**
  * Course visibility check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use moodle_url;
 use stdClass;
@@ -47,9 +47,9 @@ final class course_visibility implements checker {
                 true,
                 result::STATUS_PASSED,
                 result::SEVERITY_RECOMMENDATION,
-                get_string('check:visibility:title', 'local_coursecoach'),
-                get_string('check:visibility:passed:explanation', 'local_coursecoach'),
-                get_string('check:visibility:passed:recommendation', 'local_coursecoach'),
+                get_string('check:visibility:title', 'report_coursecoach'),
+                get_string('check:visibility:passed:explanation', 'report_coursecoach'),
+                get_string('check:visibility:passed:recommendation', 'report_coursecoach'),
                 $settingsurl
             );
         }
@@ -58,11 +58,11 @@ final class course_visibility implements checker {
             true,
             result::STATUS_WARNING,
             result::SEVERITY_IMPORTANT,
-            get_string('check:visibility:title', 'local_coursecoach'),
-            get_string('check:visibility:hidden:explanation', 'local_coursecoach'),
-            get_string('check:visibility:hidden:recommendation', 'local_coursecoach'),
+            get_string('check:visibility:title', 'report_coursecoach'),
+            get_string('check:visibility:hidden:explanation', 'report_coursecoach'),
+            get_string('check:visibility:hidden:recommendation', 'report_coursecoach'),
             $settingsurl,
-            get_string('action:visibility', 'local_coursecoach')
+            get_string('action:visibility', 'report_coursecoach')
         );
     }
 

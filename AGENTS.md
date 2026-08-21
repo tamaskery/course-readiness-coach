@@ -2,13 +2,13 @@
 
 ## Scope and Sources of Truth
 
-This repository contains the Moodle local plugin `local_coursecoach`, targeting Moodle 4.5 through 5.2. Follow the [official Moodle developer documentation](https://moodledev.io/) and Moodle core implementation; treat both as authoritative. When implementing unfamiliar Moodle functionality, inspect the relevant core code before designing an alternative. Check every change across the supported version range, avoid deprecated APIs when supported replacements exist, and follow Moodle coding standards and Frankenstyle naming throughout.
+This repository contains the Moodle report plugin `report_coursecoach`, targeting Moodle 4.5 through 5.2. Follow the [official Moodle developer documentation](https://moodledev.io/) and Moodle core implementation; treat both as authoritative. When implementing unfamiliar Moodle functionality, inspect the relevant core code before designing an alternative. Check every change across the supported version range, avoid deprecated APIs when supported replacements exist, and follow Moodle coding standards and Frankenstyle naming throughout.
 
 The product goal is: "Before opening a Moodle course to learners, Course Readiness Coach tells the teacher whether the course is technically ready and explains what should be fixed." The initial MVP is strictly read-only: it must never modify course configuration. Do not expand functionality beyond the requested scope.
 
 ## Structure and Architecture
 
-Keep `lib.php` limited to required Moodle callbacks. Put application logic in autoloaded classes under `classes/`, tests in `tests/`, Mustache templates in `templates/`, and English strings in `lang/en/local_coursecoach.php`.
+Keep `lib.php` limited to required Moodle callbacks. Put application logic in autoloaded classes under `classes/`, tests in `tests/`, Mustache templates in `templates/`, and English strings in `lang/en/report_coursecoach.php`.
 
 Implement each course-quality check as an independent checker class under `classes/check/`. Every check must return the same result contract:
 
@@ -26,7 +26,7 @@ Individual check logic must not appear in report pages, renderers, output classe
 
 Prefer Moodle APIs over custom implementations whenever an appropriate API exists. Use `moodle_url` for internal URLs, language strings for all user-facing text, and the Output API plus Mustache templates for presentation. Avoid external UI frameworks unless a compelling requirement is documented. Keep presentation logic out of templates and domain logic out of renderers.
 
-Use the `local_coursecoach` namespace and Frankenstyle component names consistently for classes, capabilities, strings, configuration, and database tables. Ensure distributed plugin contents and metadata meet current Moodle Marketplace/plugin contribution requirements.
+Use the `report_coursecoach` namespace and Frankenstyle component names consistently for classes, capabilities, strings, configuration, and database tables. Ensure distributed plugin contents and metadata meet current Moodle Marketplace/plugin contribution requirements.
 
 ## Security, Access, and Privacy
 
@@ -51,7 +51,7 @@ Use repository context efficiently while maintaining code quality.
 
 Add PHPUnit coverage for checker logic, including applicable, non-applicable, passing, warning, and failure paths as relevant. Tests must use Moodle generators and remain deterministic. Run the tests and quality tools available in the host Moodle checkout, typically:
 
-- `vendor/bin/phpunit local/coursecoach/tests`
-- `vendor/bin/phpcs --standard=moodle local/coursecoach`
+- `vendor/bin/phpunit report/coursecoach/tests`
+- `vendor/bin/phpcs --standard=moodle report/coursecoach`
 
 Before declaring work complete, review Moodle coding standards, capabilities and security, Moodle 4.5-5.2 compatibility, deprecated API usage, language strings, accessibility, and Marketplace requirements. Run available tests plus Moodle code-quality/static-analysis tools, and report any checks that could not be run. Keep commits focused; pull requests must describe scope, verification, compatibility impact, and screenshots for visible UI changes.

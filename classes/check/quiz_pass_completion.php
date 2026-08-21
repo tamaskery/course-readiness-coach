@@ -17,12 +17,12 @@
 /**
  * Quiz pass and completion configuration check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use completion_info;
 use grade_item;
@@ -48,7 +48,7 @@ final class quiz_pass_completion implements checker {
         require_once($CFG->libdir . '/completionlib.php');
         require_once($CFG->libdir . '/gradelib.php');
 
-        $title = get_string('check:quiz:title', 'local_coursecoach');
+        $title = get_string('check:quiz:title', 'report_coursecoach');
         $completioninfo = new completion_info($course);
         if (!$completioninfo->is_enabled()) {
             return $this->not_applicable($title, 'check:quiz:disabled');
@@ -99,14 +99,14 @@ final class quiz_pass_completion implements checker {
             if ($withoutpassgrade) {
                 $issues[] = get_string(
                     'check:quiz:nopassgrade:issue',
-                    'local_coursecoach',
+                    'report_coursecoach',
                     $this->activity_names($withoutpassgrade)
                 );
             }
             if ($withoutpasscompletion) {
                 $issues[] = get_string(
                     'check:quiz:nopasscompletion:issue',
-                    'local_coursecoach',
+                    'report_coursecoach',
                     $this->activity_names($withoutpasscompletion)
                 );
             }
@@ -118,9 +118,9 @@ final class quiz_pass_completion implements checker {
                 result::SEVERITY_IMPORTANT,
                 $title,
                 implode(' ', $issues),
-                get_string('check:quiz:warning:recommendation', 'local_coursecoach'),
+                get_string('check:quiz:warning:recommendation', 'report_coursecoach'),
                 new moodle_url('/course/modedit.php', ['update' => $firstaffected->id, 'return' => 0]),
-                get_string('action:quizcompletion', 'local_coursecoach')
+                get_string('action:quizcompletion', 'report_coursecoach')
             );
         }
 
@@ -129,8 +129,8 @@ final class quiz_pass_completion implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:quiz:passed:explanation', 'local_coursecoach'),
-            get_string('check:quiz:passed:recommendation', 'local_coursecoach')
+            get_string('check:quiz:passed:explanation', 'report_coursecoach'),
+            get_string('check:quiz:passed:recommendation', 'report_coursecoach')
         );
     }
 
@@ -171,8 +171,8 @@ final class quiz_pass_completion implements checker {
             result::STATUS_NOT_APPLICABLE,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string($identifier . ':explanation', 'local_coursecoach'),
-            get_string($identifier . ':recommendation', 'local_coursecoach')
+            get_string($identifier . ':explanation', 'report_coursecoach'),
+            get_string($identifier . ':recommendation', 'report_coursecoach')
         );
     }
 }
