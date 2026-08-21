@@ -43,6 +43,20 @@ jobs:
             db-port: 3306
             db-user: root
             db-pass: ''
+          - moodle-branch: MOODLE_500_STABLE
+            php-version: '8.3'
+            database: mariadb
+            db-host: 127.0.0.1
+            db-port: 3306
+            db-user: root
+            db-pass: ''
+          - moodle-branch: MOODLE_501_STABLE
+            php-version: '8.3'
+            database: mariadb
+            db-host: 127.0.0.1
+            db-port: 3306
+            db-user: root
+            db-pass: ''
           - moodle-branch: MOODLE_502_STABLE
             php-version: '8.3'
             database: mariadb
@@ -91,8 +105,16 @@ jobs:
         run: moodle-plugin-ci phplint
       - name: Moodle coding standards
         run: moodle-plugin-ci phpcs
+      - name: Moodle PHPDoc validation
+        run: moodle-plugin-ci phpdoc --max-warnings 0
       - name: Plugin validation
         run: moodle-plugin-ci validate
+      - name: Upgrade savepoint validation
+        run: moodle-plugin-ci savepoints
+      - name: Mustache lint
+        run: moodle-plugin-ci mustache
+      - name: PHP Mess Detector
+        run: moodle-plugin-ci phpmd
       - name: PHPUnit
         run: moodle-plugin-ci phpunit
 

@@ -24,6 +24,52 @@
     * passedchecks - Passed results in checker order.
     * hasnotapplicablechecks - Whether Not applicable results exist.
     * notapplicablechecks - Not applicable results in checker order.
+
+    Example context (json):
+    {
+        "score": 70,
+        "readinesslabel": "Needs attention",
+        "readinessclass": "text-bg-warning",
+        "passedcount": 2,
+        "warningcount": 1,
+        "criticalcount": 0,
+        "assessedchecks": "3 of 10 checks assessed",
+        "hasissues": true,
+        "issues": [
+            {
+                "index": 1,
+                "title": "Course completion configuration",
+                "statusclass": "text-bg-warning",
+                "statuslabel": "Warning",
+                "explanation": "Completion is enabled but no criteria are configured.",
+                "showrecommendation": true,
+                "recommendation": "Add a meaningful course completion criterion.",
+                "hassettingsurl": true,
+                "settingsurl": "https://example.com/course/completion.php?id=2",
+                "actionlabel": "Configure course completion"
+            }
+        ],
+        "haspassedchecks": true,
+        "passedchecks": [
+            {
+                "index": 2,
+                "title": "Course visibility",
+                "statusclass": "text-bg-success",
+                "statuslabel": "Passed",
+                "explanation": "The course is visible to learners."
+            }
+        ],
+        "hasnotapplicablechecks": true,
+        "notapplicablechecks": [
+            {
+                "index": 3,
+                "title": "Quiz pass and completion",
+                "statusclass": "text-bg-secondary",
+                "statuslabel": "Not applicable",
+                "explanation": "No applicable quizzes were found."
+            }
+        ]
+    }
 }}
 <div class="report-coursecoach-report">
     <p class="lead">{{#str}} reportintro, report_coursecoach {{/str}}</p>
