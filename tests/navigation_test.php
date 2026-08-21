@@ -29,6 +29,8 @@ use context_course;
 use context_system;
 use navigation_node;
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once(__DIR__ . '/../lib.php');
 
 /**
