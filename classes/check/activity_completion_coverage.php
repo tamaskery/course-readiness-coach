@@ -124,7 +124,7 @@ final class activity_completion_coverage implements checker {
     private function activity_names(array $activities): string {
         $names = [];
         foreach ($activities as $cm) {
-            $names[] = format_string($cm->name, true, ['context' => $cm->context]);
+            $names[] = name_formatter::activity($cm);
         }
 
         return implode(', ', $names);

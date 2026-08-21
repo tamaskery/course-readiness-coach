@@ -93,7 +93,7 @@ final class incomplete_content implements checker {
     private function names(stdClass $course, array $sections): string {
         $names = [];
         foreach ($sections as $section) {
-            $names[] = format_string(get_section_name($course, $section));
+            $names[] = name_formatter::section($course, $section);
         }
         return implode(', ', $names);
     }
