@@ -17,19 +17,19 @@
 /**
  * Tests for the course visibility checker.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 
 /**
  * Tests course visibility outcomes.
  *
- * @covers \local_coursecoach\check\course_visibility
+ * @covers \report_coursecoach\check\course_visibility
  */
 final class course_visibility_test extends advanced_testcase {
     /**

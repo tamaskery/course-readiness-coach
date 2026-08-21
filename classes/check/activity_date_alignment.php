@@ -17,12 +17,12 @@
 /**
  * Activity date alignment check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use moodle_url;
 use stdClass;
@@ -46,7 +46,7 @@ final class activity_date_alignment implements checker {
     public function check(stdClass $course): result {
         global $DB;
 
-        $title = get_string('check:activitydates:title', 'local_coursecoach');
+        $title = get_string('check:activitydates:title', 'report_coursecoach');
         $startdate = (int) ($course->startdate ?? 0);
         $enddate = (int) ($course->enddate ?? 0);
         if (
@@ -129,10 +129,10 @@ final class activity_date_alignment implements checker {
                 result::STATUS_WARNING,
                 result::SEVERITY_RECOMMENDATION,
                 $title,
-                get_string('check:activitydates:warning:explanation', 'local_coursecoach', $this->names($affected)),
-                get_string('check:activitydates:warning:recommendation', 'local_coursecoach'),
+                get_string('check:activitydates:warning:explanation', 'report_coursecoach', $this->names($affected)),
+                get_string('check:activitydates:warning:recommendation', 'report_coursecoach'),
                 new moodle_url('/course/modedit.php', ['update' => $first->id, 'return' => 0]),
-                get_string('action:activitydates', 'local_coursecoach')
+                get_string('action:activitydates', 'report_coursecoach')
             );
         }
 
@@ -145,8 +145,8 @@ final class activity_date_alignment implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:activitydates:passed:explanation', 'local_coursecoach'),
-            get_string('check:activitydates:passed:recommendation', 'local_coursecoach')
+            get_string('check:activitydates:passed:explanation', 'report_coursecoach'),
+            get_string('check:activitydates:passed:recommendation', 'report_coursecoach')
         );
     }
 
@@ -185,8 +185,8 @@ final class activity_date_alignment implements checker {
             result::STATUS_NOT_APPLICABLE,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:activitydates:notapplicable:explanation', 'local_coursecoach'),
-            get_string('check:activitydates:notapplicable:recommendation', 'local_coursecoach')
+            get_string('check:activitydates:notapplicable:explanation', 'report_coursecoach'),
+            get_string('check:activitydates:notapplicable:recommendation', 'report_coursecoach')
         );
     }
 }

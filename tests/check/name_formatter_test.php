@@ -17,19 +17,19 @@
 /**
  * Tests for checker result name formatting.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 
 /**
  * Verifies that name formatting produces semantic text for the output layer.
  *
- * @covers \local_coursecoach\check\name_formatter
+ * @covers \report_coursecoach\check\name_formatter
  */
 final class name_formatter_test extends advanced_testcase {
     /**

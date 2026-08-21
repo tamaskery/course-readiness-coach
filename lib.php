@@ -17,7 +17,7 @@
 /**
  * Moodle callbacks for the Course Readiness Coach plugin.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,22 +30,22 @@
  * @param context_course $context Course context.
  * @return void
  */
-function local_coursecoach_extend_navigation_course(
+function report_coursecoach_extend_navigation_course(
     navigation_node $navigation,
     stdClass $course,
     context_course $context
 ): void {
-    if ($course->id == SITEID || !has_capability('local/coursecoach:view', $context)) {
+    if ($course->id == SITEID || !has_capability('report/coursecoach:view', $context)) {
         return;
     }
 
-    $url = new moodle_url('/local/coursecoach/report.php', ['id' => $course->id]);
+    $url = new moodle_url('/report/coursecoach/index.php', ['id' => $course->id]);
     $node = $navigation->add(
-        get_string('navigationlink', 'local_coursecoach'),
+        get_string('navigationlink', 'report_coursecoach'),
         $url,
         navigation_node::TYPE_SETTING,
         null,
-        'local_coursecoach'
+        'report_coursecoach'
     );
     $node->set_force_into_more_menu(true);
 }

@@ -17,12 +17,12 @@
 /**
  * Feedback presence check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use moodle_url;
 use stdClass;
@@ -41,7 +41,7 @@ final class feedback_presence implements checker {
      * @return result
      */
     public function check(stdClass $course): result {
-        $title = get_string('check:feedback:title', 'local_coursecoach');
+        $title = get_string('check:feedback:title', 'report_coursecoach');
         $feedbacks = get_fast_modinfo($course)->get_instances_of('feedback');
         foreach ($feedbacks as $cm) {
             if ($cm->visible) {
@@ -50,8 +50,8 @@ final class feedback_presence implements checker {
                     result::STATUS_PASSED,
                     result::SEVERITY_RECOMMENDATION,
                     $title,
-                    get_string('check:feedback:passed:explanation', 'local_coursecoach'),
-                    get_string('check:feedback:passed:recommendation', 'local_coursecoach')
+                    get_string('check:feedback:passed:explanation', 'report_coursecoach'),
+                    get_string('check:feedback:passed:recommendation', 'report_coursecoach')
                 );
             }
         }
@@ -62,10 +62,10 @@ final class feedback_presence implements checker {
             result::STATUS_WARNING,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:feedback:warning:explanation', 'local_coursecoach'),
-            get_string('check:feedback:warning:recommendation', 'local_coursecoach'),
+            get_string('check:feedback:warning:explanation', 'report_coursecoach'),
+            get_string('check:feedback:warning:recommendation', 'report_coursecoach'),
             $hidden ? new moodle_url('/course/modedit.php', ['update' => $hidden->id, 'return' => 0]) : null,
-            $hidden ? get_string('action:feedback', 'local_coursecoach') : null
+            $hidden ? get_string('action:feedback', 'report_coursecoach') : null
         );
     }
 

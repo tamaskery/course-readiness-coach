@@ -17,19 +17,19 @@
 /**
  * Tests for activity completion coverage.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 
 /**
  * Tests Moodle-defined activity completion applicability and configuration.
  *
- * @covers \local_coursecoach\check\activity_completion_coverage
+ * @covers \report_coursecoach\check\activity_completion_coverage
  */
 final class activity_completion_coverage_test extends advanced_testcase {
     /**

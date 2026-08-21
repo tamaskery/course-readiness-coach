@@ -17,15 +17,15 @@
 /**
  * Course Coach report renderable.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\output;
+namespace report_coursecoach\output;
 
-use local_coursecoach\check\result;
-use local_coursecoach\readiness;
+use report_coursecoach\check\result;
+use report_coursecoach\readiness;
 use renderable;
 use renderer_base;
 use templatable;
@@ -73,7 +73,7 @@ final class report implements renderable, templatable {
                 'applicability' => $result->is_applicable(),
                 'status' => $result->get_status(),
                 'severity' => $result->get_severity(),
-                'statuslabel' => get_string('status:' . $result->get_status(), 'local_coursecoach'),
+                'statuslabel' => get_string('status:' . $result->get_status(), 'report_coursecoach'),
                 'statusclass' => $this->get_status_class($result->get_status()),
                 'title' => $result->get_title(),
                 'explanation' => $result->get_explanation(),
@@ -111,7 +111,7 @@ final class report implements renderable, templatable {
             'criticalcount' => $this->readiness->get_critical_count(),
             'assessedcount' => $assessedcount,
             'totalcount' => $totalcount,
-            'assessedchecks' => get_string('assessedchecks', 'local_coursecoach', (object) [
+            'assessedchecks' => get_string('assessedchecks', 'report_coursecoach', (object) [
                 'assessed' => $assessedcount,
                 'total' => $totalcount,
             ]),
@@ -151,13 +151,13 @@ final class report implements renderable, templatable {
     private function get_readiness_label(): string {
         switch ($this->readiness->get_label()) {
             case readiness::LABEL_READY:
-                return get_string('ready', 'local_coursecoach');
+                return get_string('ready', 'report_coursecoach');
             case readiness::LABEL_NEEDS_ATTENTION:
-                return get_string('needsattention', 'local_coursecoach');
+                return get_string('needsattention', 'report_coursecoach');
             case readiness::LABEL_NOT_READY:
-                return get_string('notready', 'local_coursecoach');
+                return get_string('notready', 'report_coursecoach');
             default:
-                return get_string('notassessed', 'local_coursecoach');
+                return get_string('notassessed', 'report_coursecoach');
         }
     }
 

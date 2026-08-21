@@ -17,15 +17,15 @@
 /**
  * Weighted Course Coach result.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach;
+namespace report_coursecoach;
 
 use coding_exception;
-use local_coursecoach\check\result;
+use report_coursecoach\check\result;
 
 /**
  * Associates one checker result with its readiness score weight.

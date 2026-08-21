@@ -17,14 +17,14 @@
 /**
  * Version metadata for the Course Readiness Coach plugin.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_coursecoach';
+$plugin->component = 'report_coursecoach';
 $plugin->version = 2026081204;
 $plugin->requires = 2024100700;
 $plugin->supported = [405, 502];

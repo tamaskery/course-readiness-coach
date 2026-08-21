@@ -17,25 +17,25 @@
 /**
  * Course Coach analysis service.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach;
+namespace report_coursecoach;
 
 use coding_exception;
-use local_coursecoach\check\activity_date_alignment;
-use local_coursecoach\check\activity_completion_coverage;
-use local_coursecoach\check\checker;
-use local_coursecoach\check\course_completion;
-use local_coursecoach\check\course_dates;
-use local_coursecoach\check\course_visibility;
-use local_coursecoach\check\feedback_presence;
-use local_coursecoach\check\incomplete_content;
-use local_coursecoach\check\quiz_pass_completion;
-use local_coursecoach\check\quiz_question_randomisation;
-use local_coursecoach\check\required_completion_activity_accessibility;
+use report_coursecoach\check\activity_date_alignment;
+use report_coursecoach\check\activity_completion_coverage;
+use report_coursecoach\check\checker;
+use report_coursecoach\check\course_completion;
+use report_coursecoach\check\course_dates;
+use report_coursecoach\check\course_visibility;
+use report_coursecoach\check\feedback_presence;
+use report_coursecoach\check\incomplete_content;
+use report_coursecoach\check\quiz_pass_completion;
+use report_coursecoach\check\quiz_question_randomisation;
+use report_coursecoach\check\required_completion_activity_accessibility;
 use stdClass;
 
 /**

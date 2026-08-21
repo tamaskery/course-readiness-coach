@@ -17,19 +17,19 @@
 /**
  * Tests for the course completion checker.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 
 /**
  * Tests completion configuration through Moodle's completion API.
  *
- * @covers \local_coursecoach\check\course_completion
+ * @covers \report_coursecoach\check\course_completion
  */
 final class course_completion_test extends advanced_testcase {
     /**

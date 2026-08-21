@@ -6,7 +6,7 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    @template local_coursecoach/report
+    @template report_coursecoach/report
 
     Course Readiness Coach report.
 
@@ -25,15 +25,15 @@
     * hasnotapplicablechecks - Whether Not applicable results exist.
     * notapplicablechecks - Not applicable results in checker order.
 }}
-<div class="local-coursecoach-report">
-    <p class="lead">{{#str}} reportintro, local_coursecoach {{/str}}</p>
+<div class="report-coursecoach-report">
+    <p class="lead">{{#str}} reportintro, report_coursecoach {{/str}}</p>
 
-    <section class="card mb-4" aria-labelledby="local-coursecoach-score-heading">
+    <section class="card mb-4" aria-labelledby="report-coursecoach-score-heading">
         <div class="card-body">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <div>
-                    <h2 id="local-coursecoach-score-heading" class="h4">
-                        {{#str}} readinessscore, local_coursecoach {{/str}}
+                    <h2 id="report-coursecoach-score-heading" class="h4">
+                        {{#str}} readinessscore, report_coursecoach {{/str}}
                     </h2>
                     <span class="badge {{readinessclass}}">{{readinesslabel}}</span>
                 </div>
@@ -43,12 +43,12 @@
             </div>
             <p class="mt-3 mb-1">{{assessedchecks}}</p>
             <p class="text-muted mb-0">
-                {{#str}} scoreexplanation, local_coursecoach {{/str}}
+                {{#str}} scoreexplanation, report_coursecoach {{/str}}
             </p>
             <div
                 class="progress mt-3"
                 role="progressbar"
-                aria-label="{{#str}} readinessscore, local_coursecoach {{/str}}"
+                aria-label="{{#str}} readinessscore, report_coursecoach {{/str}}"
                 aria-valuenow="{{score}}"
                 aria-valuemin="0"
                 aria-valuemax="100"
@@ -58,16 +58,16 @@
         </div>
     </section>
 
-    <section class="mb-4" aria-labelledby="local-coursecoach-summary-heading">
-        <h2 id="local-coursecoach-summary-heading" class="h4">
-            {{#str}} summary, local_coursecoach {{/str}}
+    <section class="mb-4" aria-labelledby="report-coursecoach-summary-heading">
+        <h2 id="report-coursecoach-summary-heading" class="h4">
+            {{#str}} summary, report_coursecoach {{/str}}
         </h2>
         <div class="row g-3">
             <div class="col-sm-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="h3 mb-0">{{passedcount}}</div>
-                        <div>{{#str}} passed, local_coursecoach {{/str}}</div>
+                        <div>{{#str}} passed, report_coursecoach {{/str}}</div>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="h3 mb-0">{{warningcount}}</div>
-                        <div>{{#str}} warnings, local_coursecoach {{/str}}</div>
+                        <div>{{#str}} warnings, report_coursecoach {{/str}}</div>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="h3 mb-0">{{criticalcount}}</div>
-                        <div>{{#str}} criticalissues, local_coursecoach {{/str}}</div>
+                        <div>{{#str}} criticalissues, report_coursecoach {{/str}}</div>
                     </div>
                 </div>
             </div>
@@ -91,20 +91,20 @@
     </section>
 
     {{#hasissues}}
-        <section class="mb-4" aria-labelledby="local-coursecoach-issues-heading">
-            <h2 id="local-coursecoach-issues-heading" class="h4">
-                {{#str}} needsattentionheading, local_coursecoach {{/str}}
+        <section class="mb-4" aria-labelledby="report-coursecoach-issues-heading">
+            <h2 id="report-coursecoach-issues-heading" class="h4">
+                {{#str}} needsattentionheading, report_coursecoach {{/str}}
             </h2>
             {{#issues}}
-                <article class="card mb-3" aria-labelledby="local-coursecoach-check-{{index}}">
+                <article class="card mb-3" aria-labelledby="report-coursecoach-check-{{index}}">
                     <div class="card-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
-                            <h3 id="local-coursecoach-check-{{index}}" class="h5 mb-2">{{title}}</h3>
+                            <h3 id="report-coursecoach-check-{{index}}" class="h5 mb-2">{{title}}</h3>
                             <span class="badge {{statusclass}}">{{statuslabel}}</span>
                         </div>
                         <p>{{explanation}}</p>
                         {{#showrecommendation}}
-                            <h4 class="h6">{{#str}} recommendation, local_coursecoach {{/str}}</h4>
+                            <h4 class="h6">{{#str}} recommendation, report_coursecoach {{/str}}</h4>
                             <p>{{recommendation}}</p>
                         {{/showrecommendation}}
                         {{#hassettingsurl}}
@@ -119,15 +119,15 @@
     {{/hasissues}}
 
     {{#haspassedchecks}}
-        <section class="mb-4" aria-labelledby="local-coursecoach-passed-heading">
-            <h2 id="local-coursecoach-passed-heading" class="h4">
-                {{#str}} passedchecksheading, local_coursecoach {{/str}}
+        <section class="mb-4" aria-labelledby="report-coursecoach-passed-heading">
+            <h2 id="report-coursecoach-passed-heading" class="h4">
+                {{#str}} passedchecksheading, report_coursecoach {{/str}}
             </h2>
             <div class="list-group">
                 {{#passedchecks}}
-                    <article class="list-group-item" aria-labelledby="local-coursecoach-check-{{index}}">
+                    <article class="list-group-item" aria-labelledby="report-coursecoach-check-{{index}}">
                         <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
-                            <h3 id="local-coursecoach-check-{{index}}" class="h5 mb-1">{{title}}</h3>
+                            <h3 id="report-coursecoach-check-{{index}}" class="h5 mb-1">{{title}}</h3>
                             <span class="badge {{statusclass}}">{{statuslabel}}</span>
                         </div>
                         <p class="mb-0">{{explanation}}</p>
@@ -138,15 +138,15 @@
     {{/haspassedchecks}}
 
     {{#hasnotapplicablechecks}}
-        <section class="mb-4" aria-labelledby="local-coursecoach-not-applicable-heading">
-            <h2 id="local-coursecoach-not-applicable-heading" class="h4">
-                {{#str}} notapplicablechecksheading, local_coursecoach {{/str}}
+        <section class="mb-4" aria-labelledby="report-coursecoach-not-applicable-heading">
+            <h2 id="report-coursecoach-not-applicable-heading" class="h4">
+                {{#str}} notapplicablechecksheading, report_coursecoach {{/str}}
             </h2>
             <div class="list-group">
                 {{#notapplicablechecks}}
-                    <article class="list-group-item" aria-labelledby="local-coursecoach-check-{{index}}">
+                    <article class="list-group-item" aria-labelledby="report-coursecoach-check-{{index}}">
                         <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
-                            <h3 id="local-coursecoach-check-{{index}}" class="h5 mb-1">{{title}}</h3>
+                            <h3 id="report-coursecoach-check-{{index}}" class="h5 mb-1">{{title}}</h3>
                             <span class="badge {{statusclass}}">{{statuslabel}}</span>
                         </div>
                         <p class="mb-0">{{explanation}}</p>

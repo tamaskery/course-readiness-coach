@@ -17,19 +17,19 @@
 /**
  * Tests for required completion activity accessibility.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 
 /**
  * Tests deterministic hidden-state checks for completion criteria activities.
  *
- * @covers \local_coursecoach\check\required_completion_activity_accessibility
+ * @covers \report_coursecoach\check\required_completion_activity_accessibility
  */
 final class required_completion_activity_accessibility_test extends advanced_testcase {
     /**

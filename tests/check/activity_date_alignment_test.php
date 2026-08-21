@@ -17,19 +17,19 @@
 /**
  * Tests for activity date alignment.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use advanced_testcase;
 
 /**
  * Tests conservative Quiz and Assignment date comparisons.
  *
- * @covers \local_coursecoach\check\activity_date_alignment
+ * @covers \report_coursecoach\check\activity_date_alignment
  */
 final class activity_date_alignment_test extends advanced_testcase {
     /**

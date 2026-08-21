@@ -17,12 +17,12 @@
 /**
  * Quiz question randomisation check.
  *
- * @package   local_coursecoach
+ * @package   report_coursecoach
  * @copyright 2026 Course Coach contributors
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_coursecoach\check;
+namespace report_coursecoach\check;
 
 use completion_info;
 use mod_quiz\quiz_settings;
@@ -47,7 +47,7 @@ final class quiz_question_randomisation implements checker {
 
         require_once($CFG->libdir . '/completionlib.php');
 
-        $title = get_string('check:randomisation:title', 'local_coursecoach');
+        $title = get_string('check:randomisation:title', 'report_coursecoach');
         $completioninfo = new completion_info($course);
         if (!$completioninfo->is_enabled()) {
             return $this->not_applicable($title);
@@ -85,10 +85,10 @@ final class quiz_question_randomisation implements checker {
                 result::STATUS_WARNING,
                 result::SEVERITY_RECOMMENDATION,
                 $title,
-                get_string('check:randomisation:warning:explanation', 'local_coursecoach', $this->names($fixed)),
-                get_string('check:randomisation:warning:recommendation', 'local_coursecoach'),
+                get_string('check:randomisation:warning:explanation', 'report_coursecoach', $this->names($fixed)),
+                get_string('check:randomisation:warning:recommendation', 'report_coursecoach'),
                 new moodle_url('/mod/quiz/edit.php', ['cmid' => $fixed[0]->id]),
-                get_string('action:quizquestions', 'local_coursecoach')
+                get_string('action:quizquestions', 'report_coursecoach')
             );
         }
 
@@ -97,8 +97,8 @@ final class quiz_question_randomisation implements checker {
             result::STATUS_PASSED,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:randomisation:passed:explanation', 'local_coursecoach'),
-            get_string('check:randomisation:passed:recommendation', 'local_coursecoach')
+            get_string('check:randomisation:passed:explanation', 'report_coursecoach'),
+            get_string('check:randomisation:passed:recommendation', 'report_coursecoach')
         );
     }
 
@@ -137,8 +137,8 @@ final class quiz_question_randomisation implements checker {
             result::STATUS_NOT_APPLICABLE,
             result::SEVERITY_RECOMMENDATION,
             $title,
-            get_string('check:randomisation:notapplicable:explanation', 'local_coursecoach'),
-            get_string('check:randomisation:notapplicable:recommendation', 'local_coursecoach')
+            get_string('check:randomisation:notapplicable:explanation', 'report_coursecoach'),
+            get_string('check:randomisation:notapplicable:recommendation', 'report_coursecoach')
         );
     }
 }
