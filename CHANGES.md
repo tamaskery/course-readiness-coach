@@ -1,0 +1,19 @@
+# Changelog
+
+## Unreleased
+
+- Improved administrator and Marketplace-facing documentation.
+- Added a security policy and a synthetic screenshot capture plan.
+
+## 0.6.1
+
+- Fixed double-escaped activity and section names while preserving normal Mustache escaping.
+- Migrated the plugin from `local_coursecoach` to the course report component `report_coursecoach` and capability `report/coursecoach:view`.
+- Expanded automated coverage to Moodle 4.5, 5.0, 5.1, and 5.2, with MariaDB and PostgreSQL validation.
+- Added focused Behat smoke tests for editing-teacher and manager access, student denial, and report rendering.
+
+## 0.6.0
+
+- Completed the initial 10-check, read-only course-readiness report and moved maturity to Beta.
+- Added Moodle 4.5 and 5.2 compatibility validation, including MariaDB and PostgreSQL coverage.
+- Strengthened release-package validation and included the complete GNU GPL v3 licence.
