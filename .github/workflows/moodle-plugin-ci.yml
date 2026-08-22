@@ -118,6 +118,54 @@ jobs:
       - name: PHPUnit
         run: moodle-plugin-ci phpunit
 
+  behat:
+    name: Behat smoke tests / Moodle 5.2 / MariaDB
+    runs-on: ubuntu-24.04
+    services:
+      mariadb:
+        image: mariadb:11
+        env:
+          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: '1'
+          MYSQL_CHARACTER_SET_SERVER: utf8mb4
+          MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval 10s --health-timeout 5s --health-retries 3
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: plugin
+          persist-credentials: false
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          ini-values: max_input_vars=5000
+          coverage: none
+      - name: Set up Moodle Behat locale
+        run: |
+          sudo locale-gen en_AU.UTF-8
+          locale -a | grep -Eqi '^en_AU\.utf-?8$'
+      - name: Initialise Moodle Plugin CI
+        run: |
+          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
+          echo "$(cd ci/bin && pwd)" >> "$GITHUB_PATH"
+          echo "$(cd ci/vendor/bin && pwd)" >> "$GITHUB_PATH"
+      - name: Install Moodle and plugin
+        run: moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1 --db-port=3306
+        env:
+          DB: mariadb
+          DB_USER: root
+          DB_PASS: ''
+          MOODLE_BRANCH: MOODLE_502_STABLE
+      - name: Run Course Readiness Coach Behat smoke tests
+        run: >-
+          moodle-plugin-ci behat --profile chrome
+          --tags="@report_coursecoach" --auto-rerun 0 --dump
+
   package-layout:
     name: Installable package layout
     runs-on: ubuntu-latest
