@@ -54,7 +54,7 @@ class behat_report_coursecoach extends behat_base {
         $course = $DB->get_record('course', ['shortname' => $shortname], 'id', MUST_EXIST);
         $url = new moodle_url('/report/coursecoach/index.php', ['id' => $course->id]);
 
-        $this->execute('behat_general::i_visit', [$url]);
+        $this->getSession()->visit($this->locate_path($url->out_as_local_url(false)));
 
         $error = $this->getSession()->getPage()->find('css', '[data-rel="fatalerror"]');
         $expected = get_string('nopermissions', 'error');
