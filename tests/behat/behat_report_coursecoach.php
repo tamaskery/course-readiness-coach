@@ -37,20 +37,36 @@ require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
  */
 class behat_report_coursecoach extends behat_base {
     /**
-     * Visit the report for a course identified by short name.
+     * Verify direct report access is denied for a course identified by short name.
      *
      * Course record IDs are not stable between isolated Behat scenarios, so a
      * standard fixed relative-URL step cannot reliably exercise direct access.
+     * Moodle's Behat hook also treats every exception page as an unexpected
+     * failure, so this step verifies the expected capability exception before
+     * clearing its detector marker.
      *
-     * @When /^I visit the Course Readiness Coach report for course "(?P<shortname_string>[^"]+)"$/
+     * @When /^direct Course Readiness Coach access for course "(?P<shortname_string>[^"]+)" is denied$/
      * @param string $shortname Course short name.
      */
-    public function i_visit_report_for_course(string $shortname): void {
+    public function direct_report_access_is_denied(string $shortname): void {
         global $DB;
 
         $course = $DB->get_record('course', ['shortname' => $shortname], 'id', MUST_EXIST);
         $url = new moodle_url('/report/coursecoach/index.php', ['id' => $course->id]);
 
         $this->execute('behat_general::i_visit', [$url]);
+
+        $error = $this->getSession()->getPage()->find('css', '[data-rel="fatalerror"]');
+        $expected = get_string('nopermissions', 'error');
+        if (!$error || !str_contains($error->getText(), $expected)) {
+            throw new \Behat\Mink\Exception\ExpectationException(
+                'Direct report access did not produce the expected Moodle permission exception.',
+                $this->getSession()
+            );
+        }
+
+        $this->execute_script(
+            'document.querySelector(\'[data-rel="fatalerror"]\').removeAttribute(\'data-rel\');'
+        );
     }
 }

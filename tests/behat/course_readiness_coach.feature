@@ -44,7 +44,7 @@ Feature: Access and render the Course Readiness Coach report
     And I am on "Course 1" course homepage
     Then "Reports" "link" should not exist in the ".secondary-navigation .moremenu.navigation" "css_element"
     And "Course Readiness Coach" "link" should not exist
-    When I visit the Course Readiness Coach report for course "C1"
+    When direct Course Readiness Coach access for course "C1" is denied
     Then I should see "Sorry, but you do not currently have permissions to do that"
     And I should not see "Readiness score"
 
