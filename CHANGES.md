@@ -1,9 +1,11 @@
 # Changelog
 
-## Unreleased
+## 1.0.0
 
-- Improved administrator and Marketplace-facing documentation.
-- Added a security policy and a synthetic screenshot capture plan.
+- Prepared the first stable release of the read-only, 10-check course-readiness report.
+- Added administrator and Marketplace-facing documentation, a security policy, and a synthetic screenshot capture plan.
+- Corrected the bundled GNU GPL v3 licence text.
+- Confirmed automated compatibility coverage for Moodle 4.5 through 5.2 with MariaDB and Moodle 5.2 with PostgreSQL.
 
 ## 0.6.1
 

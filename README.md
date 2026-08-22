@@ -4,7 +4,7 @@
 
 Course Readiness Coach is a read-only, course-level report for Moodle. It helps editing teachers, course managers, administrators, and other authorised users identify common course-configuration issues before learners use a course. Its deterministic checks support course preparation; they do not certify pedagogical quality, accessibility, security, or an error-free course.
 
-The plugin type is **Report**, its component is `report_coursecoach`, and version **0.6.1** supports Moodle 4.5 through 5.2.
+The plugin type is **Report**, its component is `report_coursecoach`, and version **1.0.0** supports Moodle 4.5 through 5.2.
 
 ## Installation
 
