@@ -126,7 +126,6 @@ $string['recommendation'] = 'Recommendation';
 $string['reportintro'] = 'Check whether your Moodle course is ready for learners.';
 $string['reporttitle'] = 'Course Readiness Coach';
 $string['scoreexplanation'] = 'The score includes applicable checks only. Passed earns full credit, Warning half credit, and Critical no credit. Any Critical issue makes the course Not ready.';
-$string['scoreoutof'] = 'Readiness score: {$a} out of 100';
 $string['status:critical'] = 'Critical';
 $string['status:not_applicable'] = 'Not applicable';
 $string['status:passed'] = 'Passed';
