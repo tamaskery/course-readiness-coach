@@ -24,7 +24,7 @@ Feature: Access and render the Course Readiness Coach report
   Scenario: An editing teacher opens Course Readiness Coach from course navigation
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    When I click on "More" "button"
+    When I click on "More" "link"
     And I click on "Reports" "link"
     And I click on "Course Readiness Coach" "link"
     Then I should see "Course Readiness Coach" in the "h1" "css_element"
@@ -33,7 +33,7 @@ Feature: Access and render the Course Readiness Coach report
   Scenario: A manager opens Course Readiness Coach for a course
     Given I log in as "manager1"
     And I am on "Course 1" course homepage
-    When I click on "More" "button"
+    When I click on "More" "link"
     And I click on "Reports" "link"
     And I click on "Course Readiness Coach" "link"
     Then I should see "Course Readiness Coach" in the "h1" "css_element"
@@ -42,8 +42,9 @@ Feature: Access and render the Course Readiness Coach report
   Scenario: A student cannot see or directly access Course Readiness Coach
     Given I log in as "student1"
     And I am on "Course 1" course homepage
-    Then "Reports" "link" should not exist
-    And "Course Readiness Coach" "link" should not exist
+    When I click on "More" "link"
+    And I click on "Reports" "link"
+    Then "Course Readiness Coach" "link" should not exist
     When I visit the Course Readiness Coach report for course "C1"
     Then I should see "Sorry, but you do not currently have permissions to do that"
     And I should not see "Readiness score"
@@ -51,7 +52,7 @@ Feature: Access and render the Course Readiness Coach report
   Scenario: The report renders a deterministic readiness result without debugging errors
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    When I click on "More" "button"
+    When I click on "More" "link"
     And I click on "Reports" "link"
     And I click on "Course Readiness Coach" "link"
     Then I should see "Readiness score"
