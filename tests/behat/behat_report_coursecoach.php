@@ -57,8 +57,8 @@ class behat_report_coursecoach extends behat_base {
         $this->getSession()->visit($this->locate_path($url->out_as_local_url(false)));
 
         $error = $this->getSession()->getPage()->find('css', '[data-rel="fatalerror"]');
-        $expected = get_string('nopermissions', 'error');
-        if (!$error || !str_contains($error->getText(), $expected)) {
+        $errorcode = $error?->find('css', '.errorcode a[href$="/nopermissions"]');
+        if (!$errorcode) {
             throw new \Behat\Mink\Exception\ExpectationException(
                 'Direct report access did not produce the expected Moodle permission exception.',
                 $this->getSession()
