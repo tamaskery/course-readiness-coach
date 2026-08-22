@@ -43,7 +43,7 @@ class behat_report_coursecoach extends behat_base {
      * standard fixed relative-URL step cannot reliably exercise direct access.
      * Moodle's Behat hook also treats every exception page as an unexpected
      * failure, so this step verifies the expected capability exception before
-     * clearing its detector marker.
+     * returning to the course page.
      *
      * @When /^direct Course Readiness Coach access for course "(?P<shortname_string>[^"]+)" is denied$/
      * @param string $shortname Course short name.
@@ -65,8 +65,7 @@ class behat_report_coursecoach extends behat_base {
             );
         }
 
-        $this->execute_script(
-            'document.querySelector(\'[data-rel="fatalerror"]\').removeAttribute(\'data-rel\');'
-        );
+        $courseurl = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $this->getSession()->visit($this->locate_path($courseurl->out_as_local_url(false)));
     }
 }
