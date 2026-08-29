@@ -16,4 +16,4 @@ Include:
 - the likely impact; and
 - any proof of concept, logs, or suggested mitigation that can be shared safely.
 
-Please allow time to acknowledge, reproduce, and coordinate a fix before public disclosure. General bugs and non-sensitive support requests belong in the [public issue tracker](https://github.com/tamaskery/course-readiness-coach/issues).
+Please allow time to acknowledge, reproduce, and coordinate a fix before public disclosure. General bugs and non-sensitive support requests belong in the [public issue tracker](https://github.com/tamaskery/moodle-report_coursecoach/issues).

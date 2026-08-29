@@ -61,8 +61,8 @@ Moodle 4.5 through Moodle 5.2.
 
 ## Support and source
 
-- Source repository: https://github.com/tamaskery/course-readiness-coach
-- Support and bug tracker: https://github.com/tamaskery/course-readiness-coach/issues
+- Source repository: https://github.com/tamaskery/moodle-report_coursecoach
+- Support and bug tracker: https://github.com/tamaskery/moodle-report_coursecoach/issues
 - Licence: GNU GPL v3 or later
 
 ## Reviewer notes

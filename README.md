@@ -87,6 +87,6 @@ Automated CI covers Moodle 4.5, 5.0, 5.1, and 5.2 with MariaDB, plus Moodle 5.2 
 
 ## Support and licence
 
-- Source: [GitHub repository](https://github.com/tamaskery/course-readiness-coach)
-- Bugs and support requests: [GitHub Issues](https://github.com/tamaskery/course-readiness-coach/issues)
+- Source: [GitHub repository](https://github.com/tamaskery/moodle-report_coursecoach)
+- Bugs and support requests: [GitHub Issues](https://github.com/tamaskery/moodle-report_coursecoach/issues)
 - Licence: [GNU GPL v3 or later](LICENSE)
